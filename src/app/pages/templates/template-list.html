@@ -1,0 +1,77 @@
+<div class="panel profile-panel">
+    <div class="panel-heading panel-background">
+        <h3 class="panel-title">Question List</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <label class="col-sm-2 pull-right">Rows on page
+                <select class="form-control selectpicker show-tick" title="Rows on page" selectpicker
+                        ng-model="questionPageSize" ng-options="i for i in [5,10,15,20,25]">
+                </select>
+            </label>
+            <div class="col-sm-2 pull-right margin-top-btn ">
+                <button class="btn btn-primary btn-raised" ng-click="gotoCreateQuestion()" ng-if="hasAddRights">Create
+                    Question
+                </button>
+            </div>
+        </div>
+
+        <div>
+            <table class="table table-responsive table-striped" st-table="questionListsData"
+                   st-safe-src="questionListsMasterData">
+                <thead>
+                <tr class="sortable ">
+                    <th class="table-id" st-sort="id"><b>ID</b></th>
+                    <th st-sort="questionDesc"><b>QUESTION</b></th>
+                    <th st-sort="questionType"><b>QUESTION TYPE</b></th>
+                    <th st-sort="answerSymbol"><b>ANSWER SYMBOL</b></th>
+                    <th ng-if="hasEditRights"><b>ACTION</b></th>
+                </tr>
+
+                <tr>
+                    <th></th>
+                    <th><input st-search="questionDesc" placeholder="Search Question"
+                               class="input-sm form-control search-input"
+                               type="search"/></th>
+                    <th><select st-search="questionType" st-input-event="change"
+                                data-ng-options="item.id as item.text for item in QuestionTypeOptions track by item.id"
+                                st-delay="0" ng-model="dummy" class="input-sm form-control">
+                        <option value="">
+                            All
+                        </option>
+
+                    </select>
+                    </th>
+                    <!--       <th><input st-search="questionType" placeholder="Search Question type"
+                                      class="input-sm form-control search-input"
+                                      type="search"/></th>-->
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in questionListsData">
+                    <td>{{item.id}}</td>
+                    <td>{{item.questionDesc}}</td>
+                    <td>{{item.questionType | answerTypeFullForm}}</td>
+                    <td ng-bind-html="item.answerSymbol | answerSymbolTypeFilter"></td>
+                    <td>
+                        <button class="btn btn-primary btn-xs btn-raised" data-toggle="modal"
+                                ng-click="editQuestionData(item)" data-toggle="tooltip"
+                                title=" Edit Question Information"><i
+                                class="fa fa-pencil fa-lg"></i>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="5" class="text-center ">
+                        <div st-pagination="" st-items-by-page="questionPageSize" st-displayed-pages="5"></div>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
