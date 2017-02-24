@@ -2,7 +2,7 @@
     <div class="col-sm-4">
         <div class="panel profile-panel">
             <div class="panel-heading panel-background">
-                <h3 class="panel-title">Add Corporate</h3>
+                <h3 class="panel-title">Add Competition</h3>
             </div>
             <div class="panel-body">
                 <form name="newCompetition.form" class="form-horizontal"
@@ -62,7 +62,7 @@
                         <div class="col-sm-12">
                             <b>Select Corporate</b><span class="note-text">*</span>
                             <div ng-class="{'has-error': newCompetition.form.corporateId.$invalid && (newCompetition.form.corporateId.$dirty || newCompetition.form.$submitted)}">
-                                <ui-select id="corporateIds" name="corporateIds" theme="bootstrap" ng-required="true" multiple
+                                <ui-select id="corporateIds" name="corporateIds" theme="bootstrap"  multiple required
                                            close-on-select="false" ng-model="selected.corporate" class="create-question-inputs" >
                                     <ui-select-match placeholder="Select Corporate">
                                         <span ng-bind="$item.name"></span>
@@ -89,7 +89,8 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-12">
-                            <button type="submit" class="btn btn-primary col-sm-12">Create Competition
+                            <button type="submit" class="btn btn-primary col-sm-12" ng-hide="newCompetition.form.$invalid">Create Competition
+
                                 <i class="fa fa-plus"></i>
                             </button>
                         </div>
