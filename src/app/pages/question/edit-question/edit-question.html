@@ -11,15 +11,15 @@
             <h3 class="panel-title">Create Question</h3>
         </div>
         <div class="panel-body">
-            <form name="newQuestion.form" class="form-horizontal" ng-submit="createQuestion(newQuestion.form.$valid)"
+            <form name="editQuestion.form" class="form-horizontal" ng-submit="updateQuestion(editQuestion.form.$valid)"
                   novalidate>
                 <div class="form-group">
                     <div class="col-sm-12">
                         <span>Enter Question Title</span><span class="note-text">*</span>
-                        <div ng-class="{'has-error': newQuestion.form.questionDesc.$invalid && (newQuestion.form.questionDesc.$dirty || newQuestion.form.$submitted)}">
+                        <div ng-class="{'has-error': editQuestion.form.questionDesc.$invalid && (editQuestion.form.questionDesc.$dirty || editQuestion.form.$submitted)}">
                             <input class="form-control create-question-inputs" name="questionDesc"
                                    placeholder="Enter Question Title"
-                                   ng-model="newQuestion.info.questionDesc" minlength="1" required>
+                                   ng-model="editQuestion.info.questionDesc" minlength="1" required>
                             <span class="help-block error-block basic-block pull-right" style="display: none">Question title is required field.</span>
                         </div>
                     </div>
@@ -29,7 +29,7 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 Select Genre<span class="note-text">*</span>
-                                <div ng-class="{'has-error': newQuestion.form.questionType.$invalid && (newQuestion.form.questionType.$dirty || newQuestion.form.$submitted)}">
+                                <div ng-class="{'has-error': editQuestion.form.questionType.$invalid && (editQuestion.form.questionType.$dirty || editQuestion.form.$submitted)}">
                                     <select class="form-control create-question-inputs"
                                             ng-model="selected.genre"
                                             id="questionType" name="questionType"
@@ -69,18 +69,18 @@
                  </div>-->
                 <div class="form-group">
                     <div class="col-sm-12">
-                        <div ng-class="{'has-error': newQuestion.form.answerOption.$invalid && (newQuestion.form.answerOption.$dirty || newQuestion.form.$submitted)}">
+                        <div ng-class="{'has-error': editQuestion.form.answerOption.$invalid && (editQuestion.form.answerOption.$dirty || editQuestion.form.$submitted)}">
                             <table class="option-table">
                                 <tr>
                                     <td>
                                         Enter Option<span class="note-text">*</span>
                                     </td>
                                 </tr>
-                                <tr ng-repeat="name in newQuestion.info.answerOption track by $index">
+                                <tr ng-repeat="name in editQuestion.info.answerOption track by $index">
                                     <td>
                                         <input type="text"
                                                class="form-control option-input "
-                                               ng-model="newQuestion.info.answerOption[$index].label"
+                                               ng-model="editQuestion.info.answerOption[$index].label"
                                                placeholder="Enter Option">
                                     </td>
                                     <td>
@@ -101,7 +101,7 @@
                 <div class="form-group">
                     <div class="col-sm-10">
                         <button type="submit" class="btn btn-primary btn-raised"
-                                ng-disabled="newQuestion.form.$invalid">Create Question
+                                ng-disabled="editQuestion.form.$invalid">Create Question
                         </button>
                     </div>
                 </div>

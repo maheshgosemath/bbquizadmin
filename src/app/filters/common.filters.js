@@ -17,14 +17,26 @@
         .filter('setThresholdFilter', setThresholdFilter)
         .filter('nullValueFilter', nullValueFilter)
         .filter('isAddressedFilter', isAddressedFilter)
-        .filter('getCount', getCount);
+        .filter('getCount', getCount)
+        .filter('linkFromUpload', linkFromUpload);
 
 
     function getCount() {
         return function (value) {
-            var tempArr=value.split(",");
+            var tempArr = value.split(",");
             return tempArr.length;
 
+        };
+    }
+
+    function linkFromUpload() {
+        return function (value) {
+            if (angular.isDefined(value) && value != null && value != "") {
+                var fileParts = value.split("/");
+                var fileName = fileParts[fileParts.length - 1];
+                return "<a target='_blank' href='../uploads/" + value + "'>" + fileName + "</a>";
+            }
+            return "<em class='text-color-muted'><small>No Attachment</small></em>";
         };
     }
 
@@ -33,6 +45,7 @@
             return value == "I" ? "InActive" : "Active";
         };
     }
+
     function isAddressedFilter() {
         return function (value) {
             return value == 1 ? "Yes" : "No";

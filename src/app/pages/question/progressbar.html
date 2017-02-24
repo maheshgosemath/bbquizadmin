@@ -1,0 +1,14 @@
+<div class="row">
+    <div class="col-sm-10">
+        <uib-progressbar ng-show="dynamic > 0 && dynamic < 100" class="progress-striped active"
+                         animate="true" value="dynamic" type="success"><b>{{dynamic}}%</b>
+        </uib-progressbar>
+    </div>
+    <div class="col-sm-2">
+        <button class="btn btn-danger btg-sm" ng-show="dynamic > 0 && dynamic <100"
+                ng-click="cancelUpload(imageFile)"><i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+    </div>
+</div>
+
+

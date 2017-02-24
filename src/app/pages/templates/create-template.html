@@ -1,10 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<div class="modal-content">
+    <div class="modal-header panel-background">
+        <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
+            <em class="fa fa-close"></em>
+        </button>
+        <h4 class="modal-title ">Create Template</h4>
+    </div>
+    <div class="modal-body footer-margin">
+        <form name="newTemplate.form" class="form-horizontal" ng-submit="createTemplate(newTemplate.form.$valid)"
+              novalidate>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <span>Template Title</span>
+                    <div ng-class="{'has-error': newTemplate.form.templateDesc.$invalid && (newTemplate.form.templateDesc.$dirty || newTemplate.form.$submitted)}">
+                        <input class="form-control create-question-inputs" name="templateDesc"
+                               ng-model="newTemplate.info.templateDesc"
+                               minlength="1" required>
+                        <span class="help-block error-block basic-block" style="display: none"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <button type="submit" class="btn btn-primary btn-raised ">Create Template
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        &nbsp;
+    </div>
+</div>

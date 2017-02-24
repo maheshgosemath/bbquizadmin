@@ -1,6 +1,6 @@
 $left-space: 180px;
 
-@include scrollbars(.5em, #d9d9d9, rgba(0,0,0,0));
+@include scrollbars(.5em, #d9d9d9, rgba(0, 0, 0, 0));
 
 html {
   position: relative;
@@ -21,7 +21,7 @@ body {
   }
 }
 
-body.mobile{
+body.mobile {
   background: none;
   /*.body-bg{
     display: block;
@@ -33,18 +33,17 @@ body.mobile{
     background-attachment: inherit;
     background-color: $body-bg;
   }*/
-  &.blur-theme .body-bg{
+  &.blur-theme .body-bg {
     @include main-background();
   }
 }
 
-@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none)
-{
-  html{
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  html {
     overflow: hidden;
     height: 100%;
   }
-  body{
+  body {
     overflow: auto;
     height: 100%;
   }
@@ -55,9 +54,10 @@ a {
   outline: 0 !important;
 }
 
-.body-bg{
+.body-bg {
   display: none;
 }
+
 .al-header {
   display: block;
   height: 49px;
@@ -213,9 +213,9 @@ a {
 }
 
 .full-invisible {
-  visibility: hidden!important;
+  visibility: hidden !important;
   * {
-    visibility: hidden!important;
+    visibility: hidden !important;
   }
 }
 
@@ -225,4 +225,31 @@ a {
 
 .margin-top-btn {
   margin-top: 15px;
+}
+
+.option-input {
+  margin-top: 5px;
+  width: 353px;
+}
+
+.add-option {
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+.delete-option {
+  margin-top: 5px;
+  margin-left: 10px;
+}
+
+.create-question-inputs {
+  margin-top: 5px;
+}
+
+.option-table {
+  margin-top: -15px !important;
+}
+
+.footer-margin{
+  margin-bottom: -37px;
 }

@@ -15,6 +15,7 @@ angular.module('UApps', [
     'ui.select',
     'ngSanitize',
     'chart.js',
+    'ngFileUpload',
 
     'UApps.services',
     'UApps.theme',
