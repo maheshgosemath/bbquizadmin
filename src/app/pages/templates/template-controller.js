@@ -78,7 +78,7 @@
 
 
         $scope.goToManageTemplate = function (item) {
-            $location.path("/manageTemplate/" + 1);
+            $location.path("/manageTemplate/" + item.id);
         };
     }
 
