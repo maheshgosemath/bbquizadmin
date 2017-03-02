@@ -6,14 +6,14 @@
             </div>
             <div class="panel-body">
                 <form name="newCompetition.form" class="form-horizontal"
-                      ng-submit="addCorporate(newCompetition.form.$valid)"
+                      ng-submit="addCompetition(newCompetition.form.$valid)"
                       novalidate>
                     <div class="form-group">
                         <div class="col-sm-12">
                             <b>Competition Title</b><span class="note-text">*</span>
-                            <div ng-class="{'has-error': newCompetition.form.title.$invalid && (newCompetition.form.title.$dirty || newCompetition.form.$submitted)}">
+                            <div ng-class="{'has-error': newCompetition.form.competitionName.$invalid && (newCompetition.form.competitionName.$dirty || newCompetition.form.$submitted)}">
                                 <input class="form-control create-question-inputs" name="title" placeholder="Title"
-                                       ng-model="newCompetition.info.name" ui-validate="'isValidName($value)'" required>
+                                       ng-model="newCompetition.info.competitionName" ui-validate="'isValidName($value)'" required>
                                 <span class="help-block error-block basic-block" style="display: none"></span>
                             </div>
                         </div>
@@ -24,7 +24,7 @@
                             <div ng-class="{'has-error': newCompetition.form.startDate.$invalid && (newCompetition.form.startDate.$dirty || newCompetition.form.$submitted)}">
                                 <p class="input-group date-margin">
                                     <input type="text" class="form-control create-question-inputs"
-                                           uib-datepicker-popup="{{format}}"
+                                           uib-datepicker-popup="yyyy-MM-dd"
                                            ng-model="newCompetition.info.startDate" is-open="popup2.opened"
                                            placeholder="Start Date"
                                            datepicker-options="dateOptions" ng-required="true" close-text="Close"
@@ -44,7 +44,7 @@
                             <div ng-class="{'has-error': newCompetition.form.endDate.$invalid && (newCompetition.form.endDate.$dirty || newCompetition.form.$submitted)}">
                                 <p class="input-group date-margin">
                                     <input type="text" class="form-control create-question-inputs"
-                                           uib-datepicker-popup="{{format}}"
+                                           uib-datepicker-popup="yyyy-MM-dd"
                                            ng-model="newCompetition.info.endDate" is-open="popup1.opened"
                                            placeholder="End Date"
                                            datepicker-options="dateOptions" ng-required="true" close-text="Close"
@@ -63,13 +63,13 @@
                             <b>Select Corporate</b><span class="note-text">*</span>
                             <div ng-class="{'has-error': newCompetition.form.corporateId.$invalid && (newCompetition.form.corporateId.$dirty || newCompetition.form.$submitted)}">
                                 <ui-select id="corporateIds" name="corporateIds" theme="bootstrap"  multiple required
-                                           close-on-select="false" ng-model="selected.corporate" class="create-question-inputs" >
+                                           close-on-select="false" ng-model="newCompetition.info.commonDetailsVOList" class="create-question-inputs" >
                                     <ui-select-match placeholder="Select Corporate">
-                                        <span ng-bind="$item.name"></span>
+                                        <span ng-bind="$item.companyName"></span>
                                     </ui-select-match>
                                     <ui-select-choices
-                                            repeat="item in (eventSubTypes | filter: $select.search) track by item.id">
-                                        <span ng-bind="item.name"></span>
+                                            repeat="item in (eventSubTypes | filter: $select.search) track by item.companySeq">
+                                        <span ng-bind="item.companyName"></span>
                                     </ui-select-choices>
                                 </ui-select>
                                 <span class="help-block error-block basic-block" style="display: none"></span>
@@ -105,10 +105,12 @@
             <tr class="sortable corporate-table">
                 <th class="table-id" st-sort="id"><b>SL.NO</b></th>
                 <th st-sort="name"><b>COMPETITION NAME</b></th>
+                <th st-sort="name"><b>COMPANY NAME</b></th>
                 <th st-sort="name"><b>START DATE</b></th>
                 <th st-sort="name"><b>END DATE</b></th>
                 <th st-sort="name"><b>TIME LIMIT</b></th>
-                <th><b>ACTION</b></th>
+                <th st-sort="name"><b>TOKEN</b></th>
+                <!--<th><b>ACTION</b></th>-->
             </tr>
             <tr>
                 <th></th>
@@ -124,11 +126,13 @@
             <tbody>
             <tr ng-repeat="item in competitionData">
                 <td>{{$index + 1}}</td>
-                <td>{{item.name}}</td>
-                <td>{{item.name}}</td>
-                <td>{{item.name}}</td>
-                <td>{{item.name}}</td>
-                <td>
+                <td>{{item.competitionName}}</td>
+                <td>{{item.companyName}}</td>
+                <td>{{item.startDate}}</td>
+                <td>{{item.endDate}}</td>
+                <td>{{item.timeLimit}}</td>
+                <td>{{item.token}}</td>
+                <!--<td>
                     <button class="btn btn-primary btn-xs" data-toggle="modal"
                             ng-click="editCompetitionData(item)" data-toggle="tooltip" title="Edit Competition"><i
                             class="fa fa-pencil fa-lg"></i>
@@ -142,7 +146,7 @@
                             ng-click="deleteCompetition(item.id)" data-toggle="tooltip" title="Delete Competition"><i
                             class="fa fa-trash-o fa-lg"></i>
                     </button>
-                </td>
+                </td>-->
             </tr>
             </tbody>
             <tfoot>

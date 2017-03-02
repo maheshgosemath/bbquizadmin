@@ -8,8 +8,30 @@
     angular.module('UApps.pages.corporate', [])
         .config(routeConfig).controller('corporateCtrl', corporateCtrl);
 
-    function corporateCtrl($location) {
+    function corporateCtrl($scope, CompanyServices, toastr) {
 
+        CompanyServices.getList().then(function(response) {
+            $scope.corporatesData = response.companyList;
+        });
+
+        $scope.addCorporate = function(isValid) {
+            if(isValid) {
+                var data = {
+                    corporateName: $scope.newCorporate.corporateName,
+                    spocName: $scope.newCorporate.spocName,
+                    spocEmail: $scope.newCorporate.spocEmail
+                };
+                var responseData = CompanyServices.create(data).then(function(response) {
+                    toastr.success('Company added successfully.');
+                    resetForm();
+                });
+            }
+        }
+        function resetForm() {
+            $scope.newCorporate.corporateName = '';
+            $scope.newCorporate.spocName = '';
+            $scope.newCorporate.spocEmail = '';
+        }
     }
 
 

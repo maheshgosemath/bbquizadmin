@@ -6,17 +6,15 @@
 
     angular.module('UApps.services', [])
         .factory('HttpService', function ($http, $q, $location, toastr) {
-            var apiRoot = "../rest/";
+            var apiRoot = "/";
 
             var HttpService = function (apiModule) {
                 this.apiModule = apiModule;
             };
 
             function makeRequestSuccess(response) {
-                if (response.data.messageType == "SUCCESS") {
+                if (response.status == 200) {
                     return response.data;
-                } else if(response.data.messageType == "UNAUTHORIZED") {
-                    toastr.error("Unauthorized access!","Error");
                 } else {
                     return $q.reject(response.data.message);
                 }
@@ -33,7 +31,9 @@
             };
             HttpService.prototype.post = function (url, params) {
                 var self = this;
-                return $http.post(apiRoot + self.apiModule + "/" + url, params).then(makeRequestSuccess, makeRequestFailed);
+                return $http.post(apiRoot + self.apiModule + "/" + url, params, {
+                    transformRequest: angular.identity,
+                    headers: {'Content-Type': undefined}}).then(makeRequestSuccess, makeRequestFailed);
             };
             HttpService.prototype.delete = function (url) {
                 var self = this;

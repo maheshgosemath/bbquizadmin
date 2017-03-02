@@ -10,9 +10,9 @@
                     <div class="form-group">
                         <div class="col-sm-12">
                             <b>Corporate Name</b><span class="note-text">*</span>
-                            <div ng-class="{'has-error': newCorporate.form.courseName.$invalid && (newCorporate.form.courseName.$dirty || newCorporate.form.$submitted)}">
-                                <input class="form-control create-question-inputs" name="courseName"
-                                       ng-model="newCorporate.info.name" ui-validate="'isValidName($value)'"  required>
+                            <div ng-class="{'has-error': newCorporate.form.corporateName.$invalid && (newCorporate.form.corporateName.$dirty || newCorporate.form.$submitted)}">
+                                <input class="form-control create-question-inputs" name="corporateName"
+                                       ng-model="newCorporate.corporateName" ui-validate="'isValidName($value)'"  required>
                                 <span class="help-block error-block basic-block" style="display: none"></span>
                             </div>
                         </div>
@@ -20,18 +20,18 @@
                     <div class="form-group">
                         <div class="col-sm-12">
                             <b>POC Name</b><span class="note-text">*</span>
-                            <div ng-class="{'has-error': newCorporate.form.code.$invalid && (newCorporate.form.code.$dirty || newCorporate.form.$submitted)}">
-                                <input class="form-control create-question-inputs" name="code"
-                                       ng-model="newCorporate.info.code"  required>
+                            <div ng-class="{'has-error': newCorporate.form.spocName.$invalid && (newCorporate.form.spocName.$dirty || newCorporate.form.$submitted)}">
+                                <input class="form-control create-question-inputs" name="spocName"
+                                       ng-model="newCorporate.spocName"  required>
                                 <span class="help-block error-block basic-block" style="display: none"></span>
                             </div>
                         </div>
                     </div>    <div class="form-group">
                         <div class="col-sm-12">
                             <b>POC Email</b><span class="note-text">*</span>
-                            <div ng-class="{'has-error': newCorporate.form.code.$invalid && (newCorporate.form.code.$dirty || newCorporate.form.$submitted)}">
-                                <input class="form-control create-question-inputs" name="code"
-                                       ng-model="newCorporate.info.code"  required>
+                            <div ng-class="{'has-error': newCorporate.form.spocEmail.$invalid && (newCorporate.form.spocEmail.$dirty || newCorporate.form.$submitted)}">
+                                <input class="form-control create-question-inputs" name="spocEmail"
+                                       ng-model="newCorporate.spocEmail"  required>
                                 <span class="help-block error-block basic-block" style="display: none"></span>
                             </div>
                         </div>
@@ -70,9 +70,9 @@
             <tbody>
             <tr ng-repeat="item in corporatesData">
                 <td>{{$index + 1}}</td>
-                <td>{{item.name}}</td>
-                <td>{{item.name}}</td>
-                <td>{{item.name}}</td>
+                <td>{{item.corporateName}}</td>
+                <td>{{item.spocName}}</td>
+                <td>{{item.spocEmail}}</td>
                 <td>
                     <button class="btn btn-primary btn-xs" data-toggle="modal"
                             ng-click="editCourseData(item)" data-toggle="tooltip" title="Edit Course"><i class="fa fa-pencil fa-lg"></i>

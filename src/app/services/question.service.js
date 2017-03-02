@@ -10,10 +10,10 @@
     /** @ngInject */
     function QuestionServices(HttpService) {
 
-        var httpService = new HttpService("question");
+        var httpService = new HttpService("brainbout");
         var QuestionServices = {
             create: function (obj) {
-                return httpService.post("create", obj);
+                return httpService.post("createquestion", obj);
             }, update: function (obj) {
                 return httpService.post("update", obj);
             }, delete: function (id) {
@@ -23,7 +23,7 @@
             }, questionInfo: function (questionId) {
                 return httpService.get("questionInfo/" + questionId);
             }, getGenreList: function () {
-                return httpService.get("genreList" );
+                return httpService.get("genredetails" );
             }
         };
         return QuestionServices;
@@ -40,13 +40,11 @@
             });
         };
         QuestionsData.create = function (obj) {
-            var self = this;
-            if (obj.hasOwnProperty("id"))
-                delete obj.id;
+            //var self = this;
             return QuestionServices.create(obj).then(function (data) {
-                obj.id = data.message;
-                self.rows.push(obj);
-                return self.rows;
+                //obj.id = data.message;
+                //self.rows.push(obj);
+                return data;
             });
         };
         QuestionsData.delete = function (id) {

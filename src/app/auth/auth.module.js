@@ -11,8 +11,8 @@
             function ($scope, $rootScope, $location, AuthenticationService, toastr) {
 
                 $scope.userLoginInfo = {
-                    userName : "",
-                    userPassword : ""
+                    userName : "root",
+                    userPassword : "root"
                 };
                 $scope.loginForm = {};
 
