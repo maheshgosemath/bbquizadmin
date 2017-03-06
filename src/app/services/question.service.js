@@ -13,7 +13,11 @@
         var httpService = new HttpService("brainbout");
         var QuestionServices = {
             create: function (obj) {
-                return httpService.post("createquestion", obj);
+                var config = {
+                    transformRequest: angular.identity,
+                    headers: {'Content-Type': undefined}
+                }
+                return httpService.post("createquestion", obj, config);
             }, update: function (obj) {
                 return httpService.post("update", obj);
             }, delete: function (id) {

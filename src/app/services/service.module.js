@@ -31,9 +31,11 @@
             };
             HttpService.prototype.post = function (url, params) {
                 var self = this;
-                return $http.post(apiRoot + self.apiModule + "/" + url, params, {
-                    transformRequest: angular.identity,
-                    headers: {'Content-Type': undefined}}).then(makeRequestSuccess, makeRequestFailed);
+                return $http.post(apiRoot + self.apiModule + "/" + url, params).then(makeRequestSuccess, makeRequestFailed);
+            };
+            HttpService.prototype.post = function (url, params, config) {
+                var self = this;
+                return $http.post(apiRoot + self.apiModule + "/" + url, params, config).then(makeRequestSuccess, makeRequestFailed);
             };
             HttpService.prototype.delete = function (url) {
                 var self = this;

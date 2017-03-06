@@ -65,11 +65,11 @@
                                 <ui-select id="corporateIds" name="corporateIds" theme="bootstrap"  multiple required
                                            close-on-select="false" ng-model="newCompetition.info.commonDetailsVOList" class="create-question-inputs" >
                                     <ui-select-match placeholder="Select Corporate">
-                                        <span ng-bind="$item.companyName"></span>
+                                        <span ng-bind="$item.name"></span>
                                     </ui-select-match>
                                     <ui-select-choices
-                                            repeat="item in (eventSubTypes | filter: $select.search) track by item.companySeq">
-                                        <span ng-bind="item.companyName"></span>
+                                            repeat="item in (eventSubTypes | filter: $select.search) track by item.seq">
+                                        <span ng-bind="item.name"></span>
                                     </ui-select-choices>
                                 </ui-select>
                                 <span class="help-block error-block basic-block" style="display: none"></span>
