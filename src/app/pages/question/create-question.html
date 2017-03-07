@@ -31,9 +31,9 @@
                                 Select Genre<span class="note-text">*</span>
                                 <div ng-class="{'has-error': newQuestion.form.questionType.$invalid && (newQuestion.form.questionType.$dirty || newQuestion.form.$submitted)}">
                                     <select class="form-control create-question-inputs"
-                                            ng-model="selected.genre"
+                                            ng-model="newQuestion.info.genre"
                                             id="questionType" name="questionType"
-                                            ng-options="item.id as item.genre for g in genreList" required>
+                                            ng-options="item.name for item in genreList track by item.seq" required>
                                         <option value="">Select Genre Type</option>
                                     </select>
                                     <span class="help-block error-block basic-block" style="display: none"></span>
@@ -42,7 +42,7 @@
                             <div class="col-sm-6">
                                 Upload Image
                                 <input class="form-control create-question-inputs" type="file"
-                                       ngf-select="uploadImage($file)"
+                                       ngf-select="selectImage($file)"
                                        ng-model="imageFile"
                                        name="file"
                                        accept="image/*" ngf-max-size="2MB"><br>
@@ -50,30 +50,13 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="form-group">
-                     <div class="col-sm-5">
-                         Upload Image
-                         <input class="form-control create-question-inputs" type="file" ngf-select="uploadImage($file)"
-                                ng-model="imageFile"
-                                name="file"
-                                accept="image/*" ngf-max-size="2MB"><br>
-                             &lt;!&ndash; <uib-progressbar ng-show="dynamic > 0 && dynamic < 100" class="progress-striped active"
-                                               animate="true" value="dynamic" type="success"><b>{{dynamic}}%</b>
-                              </uib-progressbar>&ndash;&gt;
-
-                       &lt;!&ndash;  <button class="btn btn-danger btg-sm" ng-show="dynamic > 0 && dynamic <100"
-                                 ng-click="cancelUpload(imageFile)"><i class="fa fa-times" aria-hidden="true"></i>
-                         </button>&ndash;&gt;
-
-                     </div>
-                 </div>-->
                 <div class="form-group">
                     <div class="col-sm-12">
                         <div ng-class="{'has-error': newQuestion.form.answerOption.$invalid && (newQuestion.form.answerOption.$dirty || newQuestion.form.$submitted)}">
                             <table class="option-table">
                                 <tr>
                                     <td>
-                                        Enter Option<span class="note-text">*</span>
+                                        Enter Option<span class="note-text ">*</span>
                                     </td>
                                 </tr>
                                 <tr ng-repeat="name in newQuestion.info.answerOption track by $index">
@@ -95,6 +78,17 @@
                                     </td>
                                 </tr>
                             </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <span>Correct answer</span><span class="note-text">*</span>
+                        <div ng-class="{'has-error': newQuestion.form.correctAnswer.$invalid && (newQuestion.form.correctAnswer.$dirty || newQuestion.form.$submitted)}">
+                            <input class="form-control create-question-inputs" name="correctAnswer"
+                                   placeholder="Enter correct answer"
+                                   ng-model="newQuestion.info.correctAnswer" maxlength="1" required>
+                            <span class="help-block error-block basic-block pull-right" style="display: none">Correct answer is required field.</span>
                         </div>
                     </div>
                 </div>

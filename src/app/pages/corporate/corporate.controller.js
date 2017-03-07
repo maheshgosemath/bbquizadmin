@@ -8,8 +8,59 @@
     angular.module('UApps.pages.corporate', [])
         .config(routeConfig).controller('corporateCtrl', corporateCtrl);
 
-    function corporateCtrl($location) {
+    function corporateCtrl($scope, CompanyServices, $uibModal, toastr) {
 
+        getCorporateList();
+        function getCorporateList(){
+            CompanyServices.getList().then(function (response) {
+                $scope.corporateMasterData = response.companyList;
+                $scope.corporatesData = [].concat($scope.corporateMasterData);
+            });
+        }
+
+
+        $scope.addCorporate = function (isValid) {
+            if (isValid) {
+                var data = {
+                    corporateName: $scope.newCorporate.info.corporateName,
+                    spocName: $scope.newCorporate.info.spocName,
+                    spocEmail: $scope.newCorporate.info.spocEmail
+                };
+                var responseData = CompanyServices.create(data).then(function (response) {
+                    $scope.newCorporate.form.$setPristine();
+                    $scope.newCorporate.info = "";
+                    getCorporateList();
+                    toastr.success('Company added successfully.');
+
+                });
+            }
+        };
+      /*  function resetForm() {
+            $scope.newCorporate.corporateName = '';
+            $scope.newCorporate.spocName = '';
+            $scope.newCorporate.spocEmail = '';
+        }*/
+        $scope.newCorporate = {
+            form: {},
+            info: {}
+        };
+
+        $scope.editCorporate = {
+            form: {},
+            info: {}
+        };
+        var editCorporateModalBox;
+        $scope.editCorporateData = function (item) {
+            $scope.editCorporate.info = item;
+            editCorporateModalBox = $uibModal.open({
+                animation: true,
+                templateUrl: 'app/pages/corporate/edit-corporate.html',
+                size: 'md',
+                backdrop: 'static',
+                keyboard: false,
+                scope: $scope
+            });
+        };
     }
 
 

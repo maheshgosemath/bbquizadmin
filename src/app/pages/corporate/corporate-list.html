@@ -10,9 +10,9 @@
                     <div class="form-group">
                         <div class="col-sm-12">
                             <b>Corporate Name</b><span class="note-text">*</span>
-                            <div ng-class="{'has-error': newCorporate.form.courseName.$invalid && (newCorporate.form.courseName.$dirty || newCorporate.form.$submitted)}">
-                                <input class="form-control create-question-inputs" name="courseName"
-                                       ng-model="newCorporate.info.name" ui-validate="'isValidName($value)'"  required>
+                            <div ng-class="{'has-error': newCorporate.form.corporateName.$invalid && (newCorporate.form.corporateName.$dirty || newCorporate.form.$submitted)}">
+                                <input class="form-control create-question-inputs" name="corporateName"
+                                       ng-model="newCorporate.info.corporateName" ui-validate="'isValidName($value)'"  required>
                                 <span class="help-block error-block basic-block" style="display: none"></span>
                             </div>
                         </div>
@@ -20,18 +20,18 @@
                     <div class="form-group">
                         <div class="col-sm-12">
                             <b>POC Name</b><span class="note-text">*</span>
-                            <div ng-class="{'has-error': newCorporate.form.code.$invalid && (newCorporate.form.code.$dirty || newCorporate.form.$submitted)}">
-                                <input class="form-control create-question-inputs" name="code"
-                                       ng-model="newCorporate.info.code"  required>
+                            <div ng-class="{'has-error': newCorporate.form.spocName.$invalid && (newCorporate.form.spocName.$dirty || newCorporate.form.$submitted)}">
+                                <input class="form-control create-question-inputs" name="spocName"
+                                       ng-model="newCorporate.info.spocName"  required>
                                 <span class="help-block error-block basic-block" style="display: none"></span>
                             </div>
                         </div>
                     </div>    <div class="form-group">
                         <div class="col-sm-12">
                             <b>POC Email</b><span class="note-text">*</span>
-                            <div ng-class="{'has-error': newCorporate.form.code.$invalid && (newCorporate.form.code.$dirty || newCorporate.form.$submitted)}">
-                                <input class="form-control create-question-inputs" name="code"
-                                       ng-model="newCorporate.info.code"  required>
+                            <div ng-class="{'has-error': newCorporate.form.spocEmail.$invalid && (newCorporate.form.spocEmail.$dirty || newCorporate.form.$submitted)}">
+                                <input class="form-control create-question-inputs" name="spocEmail"
+                                       ng-model="newCorporate.info.spocEmail"  required>
                                 <span class="help-block error-block basic-block" style="display: none"></span>
                             </div>
                         </div>
@@ -51,15 +51,15 @@
         <table class="table" st-table="corporatesData" st-safe-src="corporateMasterData">
             <thead>
             <tr class="sortable corporate-table">
-                <th class="table-id" st-sort="id"><b>SL.NO</b></th>
-                <th st-sort="name"><b>CORPORATE NAME</b></th>
-                <th st-sort="name"><b>POC NAME</b></th>
-                <th st-sort="name"><b>POC EMAIL</b></th>
+                <th class="table-id" st-sort="$index+1"><b>SL.NO</b></th>
+                <th st-sort="corporateName"><b>CORPORATE NAME</b></th>
+                <th st-sort="spocName"><b>POC NAME</b></th>
+                <th st-sort="spocEmail"><b>POC EMAIL</b></th>
                 <th><b>ACTION</b></th>
             </tr>
             <tr>
                 <th></th>
-                <th><input st-search="name" placeholder="Search Corporate"
+                <th><input st-search="corporateName" placeholder="Search Corporate"
                            class="input-sm form-control search-input"
                            type="search"/></th>
                 <th></th>
@@ -70,19 +70,19 @@
             <tbody>
             <tr ng-repeat="item in corporatesData">
                 <td>{{$index + 1}}</td>
-                <td>{{item.name}}</td>
-                <td>{{item.name}}</td>
-                <td>{{item.name}}</td>
+                <td>{{item.corporateName}}</td>
+                <td>{{item.spocName}}</td>
+                <td>{{item.spocEmail}}</td>
                 <td>
                     <button class="btn btn-primary btn-xs" data-toggle="modal"
-                            ng-click="editCourseData(item)" data-toggle="tooltip" title="Edit Course"><i class="fa fa-pencil fa-lg"></i>
+                            ng-click="editCorporateData(item)" data-toggle="tooltip" title="Edit Corporate"><i class="fa fa-pencil fa-lg"></i>
                     </button>
-                    <button class="btn btn-primary btn-xs" data-toggle="modal"
+                   <!-- <button class="btn btn-primary btn-xs" data-toggle="modal"
                             ng-click="gotoManageBatches(item.id)"><i class="fa fa-users fa-lg" data-toggle="tooltip" title="Assign Batch"></i>
-                    </button>
+                    </button>-->
                     <button class="btn btn-primary btn-xs" data-toggle="modal"
                             confirm="Warning! This will also delete everything related to this course. Are you sure, you want to delete?"
-                            ng-click="deleteCourse(item.id)" data-toggle="tooltip" title="Delete Course"><i class="fa fa-trash-o fa-lg"></i>
+                            ng-click="deleteCorporate(item.id)" data-toggle="tooltip" title="Delete Corporate"><i class="fa fa-trash-o fa-lg"></i>
                     </button>
                 </td>
             </tr>

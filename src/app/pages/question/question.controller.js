@@ -8,7 +8,7 @@
     angular.module('UApps.pages.question', [])
         .config(routeConfig).controller('questionCtrl', questionCtrl);
 
-    function questionCtrl($scope, Upload,$uibModal, toastr, $location,QuestionsData, Question) {
+    function questionCtrl($scope, QuestionServices,Upload,$uibModal, toastr, $location,QuestionsData, Question) {
 
         $scope.questionPageSize = 10;
         getGenreList();
@@ -87,14 +87,62 @@
         };
         function getGenreList() {
             QuestionsData.getGenreList().then(function (response) {
-                $scope.genreList = response;
+                $scope.genreList = response.genredetails;
             });
         }
+
+        getQuestionsList();
+        function getQuestionsList() {
+            QuestionServices.getList().then(function (response) {
+                $scope.questionListsMasterData = response.questionList;
+                $scope.questionListsData = [].concat($scope.questionListsMasterData);
+            });
+        }
+
         $scope.selected={
             genre:""
         };
 
+        $scope.selectImage = function(file) {
+            $scope.imageFile = file;
+        }
+
         $scope.createQuestion = function (isValid) {
+            if (isValid) {
+                var optionsArr = new Array();
+                var options = $scope.newQuestion.info.answerOption;
+                var correctAns = $scope.newQuestion.info.correctAnswer;
+
+                for(var i=0;i<options.length;i++) {
+                    var obj = new Object();
+                    obj.optionTitle = options[i].label;
+                    obj.isCorrect = 'N';
+                    if(correctAns == (i+1)) {
+                        obj.isCorrect = 'Y';
+                    }
+                    optionsArr.push(obj);
+                }
+
+                var questionData = {
+                    quizTitle: $scope.newQuestion.info.questionDesc,
+                    optionList: optionsArr
+                };
+                var data = {
+                    quizVO: questionData,
+                    genreSeq: $scope.newQuestion.info.genre.seq
+                };
+
+                var formData = new FormData();
+                formData.append('multipartFile', $scope.imageFile);
+                formData.append('addQuestionVO', JSON.stringify(data));
+
+                QuestionsData.create(formData).then(function(data) {
+                    toastr.success("Question created successfully");
+                });
+            }
+        };
+
+     /*   $scope.createQuestion = function (isValid) {
             if (isValid) {
                 QuestionsData.create(Question.createFromObject($scope.newQuestion.info)).then(function (newdata) {
                     toastr.success("Question created successfully!", "Success");
@@ -107,11 +155,11 @@
                     toastr.error(errorMsg, "Failed");
                 });
             }
-        };
-        $scope.editQuestionData = function (item) {
-            $location.path("editQuestion/" + 2);
-        };
+        };*/
 
+        $scope.editQuestionData = function (item) {
+            $location.path("editQuestion/" + item.id);
+        };
 
     }
 

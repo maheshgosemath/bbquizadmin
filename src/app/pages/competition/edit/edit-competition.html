@@ -11,15 +11,15 @@
             <h3 class="panel-title">Create Question</h3>
         </div>
         <div class="panel-body">
-            <form name="newCompetition.form" class="form-horizontal"
-                  ng-submit="addCompetition(newCompetition.form.$valid)"
+            <form name="editCompetion.form" class="form-horizontal"
+                  ng-submit="addCompetition(editCompetion.form.$valid)"
                   novalidate>
                 <div class="form-group">
                     <div class="col-sm-12">
                         <b>Competition Title</b><span class="note-text">*</span>
-                        <div ng-class="{'has-error': newCompetition.form.competitionName.$invalid && (newCompetition.form.competitionName.$dirty || newCompetition.form.$submitted)}">
+                        <div ng-class="{'has-error': editCompetion.form.competitionName.$invalid && (editCompetion.form.competitionName.$dirty || editCompetion.form.$submitted)}">
                             <input class="form-control create-question-inputs" name="title" placeholder="Title"
-                                   ng-model="newCompetition.info.competitionName" ui-validate="'isValidName($value)'" required>
+                                   ng-model="editCompetion.info.competitionName" ui-validate="'isValidName($value)'" required>
                             <span class="help-block error-block basic-block" style="display: none"></span>
                         </div>
                     </div>
@@ -27,50 +27,49 @@
                 <div class="form-group">
                     <div class="col-sm-6">
 
-                            <b>Start Date</b><span class="note-text">*</span>
-                            <div ng-class="{'has-error': newCompetition.form.startDate.$invalid && (newCompetition.form.startDate.$dirty || newCompetition.form.$submitted)}">
-                                <p class="input-group date-margin">
-                                    <input type="text" class="form-control create-question-inputs"
-                                           uib-datepicker-popup="yyyy-MM-dd"
-                                           ng-model="newCompetition.info.startDate" is-open="popup2.opened"
-                                           placeholder="Start Date"
-                                           datepicker-options="dateOptions" ng-required="true" close-text="Close"
-                                           alt-input-formats="altInputFormats" name="startDate"/>
-                                    <span class="input-group-btn ">
+                        <b>Start Date</b><span class="note-text">*</span>
+                        <div ng-class="{'has-error': editCompetion.form.startDate.$invalid && (editCompetion.form.startDate.$dirty || editCompetion.form.$submitted)}">
+                            <p class="input-group date-margin">
+                                <input type="text" class="form-control create-question-inputs"
+                                       uib-datepicker-popup="yyyy-MM-dd"
+                                       ng-model="editCompetion.info.startDate" is-open="popup2.opened"
+                                       placeholder="Start Date"
+                                       datepicker-options="dateOptions" ng-required="true" close-text="Close"
+                                       alt-input-formats="altInputFormats" name="startDate"/>
+                                <span class="input-group-btn ">
                                             <button type="button" class="btn btn-default create-question-inputs"
                                                     ng-click="open2()">
                                                 <i class="glyphicon glyphicon-calendar"></i></button>
                                         </span></p>
-                                <span class="help-block error-block basic-block" style="display: none"></span>
-                            </div>
+                            <span class="help-block error-block basic-block" style="display: none"></span>
+                        </div>
 
                     </div>
                     <div class="col-sm-6">
-
-                            <b>End Date</b><span class="note-text">*</span>
-                            <div ng-class="{'has-error': newCompetition.form.endDate.$invalid && (newCompetition.form.endDate.$dirty || newCompetition.form.$submitted)}">
-                                <p class="input-group date-margin">
-                                    <input type="text" class="form-control create-question-inputs"
-                                           uib-datepicker-popup="yyyy-MM-dd"
-                                           ng-model="newCompetition.info.endDate" is-open="popup1.opened"
-                                           placeholder="End Date"
-                                           datepicker-options="dateOptions" ng-required="true" close-text="Close"
-                                           alt-input-formats="altInputFormats" name="endDate"/>
-                                    <span class="input-group-btn ">
+                        <b>End Date</b><span class="note-text">*</span>
+                        <div ng-class="{'has-error': editCompetion.form.endDate.$invalid && (editCompetion.form.endDate.$dirty || editCompetion.form.$submitted)}">
+                            <p class="input-group date-margin">
+                                <input type="text" class="form-control create-question-inputs"
+                                       uib-datepicker-popup="yyyy-MM-dd"
+                                       ng-model="editCompetion.info.endDate" is-open="popup1.opened"
+                                       placeholder="End Date"
+                                       datepicker-options="dateOptions" ng-required="true" close-text="Close"
+                                       alt-input-formats="altInputFormats" name="endDate"/>
+                                <span class="input-group-btn ">
                                             <button type="button" class="btn btn-default create-question-inputs"
                                                     ng-click="open1()">
                                                 <i class="glyphicon glyphicon-calendar"></i></button>
                                         </span></p>
-                                <span class="help-block error-block basic-block" style="display: none"></span>
-                            </div>
+                            <span class="help-block error-block basic-block" style="display: none"></span>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-12">
                         <b>Select Corporate</b><span class="note-text">*</span>
-                        <div ng-class="{'has-error': newCompetition.form.corporateId.$invalid && (newCompetition.form.corporateId.$dirty || newCompetition.form.$submitted)}">
+                        <div ng-class="{'has-error': editCompetion.form.corporateId.$invalid && (editCompetion.form.corporateId.$dirty || editCompetion.form.$submitted)}">
                             <ui-select id="corporateIds" name="corporateIds" theme="bootstrap"  multiple required
-                                       close-on-select="false" ng-model="newCompetition.info.commonDetailsVOList" class="create-question-inputs" >
+                                       close-on-select="false" ng-model="editCompetion.info.commonDetailsVOList" class="create-question-inputs" >
                                 <ui-select-match placeholder="Select Corporate">
                                     <span ng-bind="$item.name"></span>
                                 </ui-select-match>
@@ -85,18 +84,18 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-12">
-                        <div ng-class="{'has-error': newCompetition.form.domain.$invalid && (newCompetition.form.domain.$dirty || newCompetition.form.$submitted)}">
+                        <div ng-class="{'has-error': editCompetion.form.domain.$invalid && (editCompetion.form.domain.$dirty || editCompetion.form.$submitted)}">
                             <table class="">
                                 <tr>
                                     <td>
                                         <b>Enter Domain</b><span class="note-text">*</span>
                                     </td>
                                 </tr>
-                                <tr ng-repeat="name in newCompetition.info.domain track by $index">
+                                <tr ng-repeat="name in editCompetion.info.domain track by $index">
                                     <td>
                                         <input type="text"
                                                class="form-control option-input "
-                                               ng-model="newCompetition.info.domain[$index].domainName"
+                                               ng-model="editCompetion.info.domain[$index].domainName"
                                                placeholder="Enter Option">
                                     </td>
                                     <td>
@@ -117,18 +116,17 @@
                 <div class="form-group">
                     <div class="col-sm-12">
                         <b>Time Limit</b><span class="note-text">*</span>
-                        <div ng-class="{'has-error': newCompetition.form.timeLimit.$invalid && (newCompetition.form.timeLimit.$dirty || newCompetition.form.$submitted)}">
+                        <div ng-class="{'has-error': editCompetion.form.timeLimit.$invalid && (editCompetion.form.timeLimit.$dirty || editCompetion.form.$submitted)}">
                             <input class="form-control create-question-inputs" name="timeLimit"
                                    placeholder="Time Limit"
-                                   ng-model="newCompetition.info.timeLimit" required>
+                                   ng-model="editCompetion.info.timeLimit" required>
                             <span class="help-block error-block basic-block" style="display: none"></span>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-12">
-                        <button type="submit" class="btn btn-primary col-sm-12" ng-disabled="newCompetition.form.$invalid">Create Competition
-                            <i class="fa fa-plus"></i>
+                        <button type="submit" class="btn btn-primary col-sm-12" ng-disabled="editCompetion.form.$invalid">Update
                         </button>
                     </div>
                 </div>

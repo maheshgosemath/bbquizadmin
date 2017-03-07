@@ -1,158 +1,73 @@
-<div class="row">
-    <div class="col-sm-4">
-        <div class="panel profile-panel">
-            <div class="panel-heading panel-background">
-                <h3 class="panel-title">Add Competition</h3>
+<script src="competition-controller.js"></script>
+<div class="horizontal-scroll">
+    <div class="panel profile-panel ">
+        <div class="panel-heading panel-background">
+            <h3 class="panel-title">Competition List</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-10 margin-top-btn col-xs-10 ">
+                    <button class="btn pull-right btn-primary btn-raised" ng-click="gotoCreateCompetition()">Add Competition</button>
+                </div>
+                <label class="col-sm-2 col-xs-2">Rows on page
+                    <select class="form-control selectpicker show-tick" title="Rows on page" selectpicker
+                            ng-model="competitionPageSize" ng-options="i for i in [5,10,15,20,25]">
+                    </select>
+                </label>
             </div>
-            <div class="panel-body">
-                <form name="newCompetition.form" class="form-horizontal"
-                      ng-submit="addCorporate(newCompetition.form.$valid)"
-                      novalidate>
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <b>Competition Title</b><span class="note-text">*</span>
-                            <div ng-class="{'has-error': newCompetition.form.title.$invalid && (newCompetition.form.title.$dirty || newCompetition.form.$submitted)}">
-                                <input class="form-control create-question-inputs" name="title" placeholder="Title"
-                                       ng-model="newCompetition.info.name" ui-validate="'isValidName($value)'" required>
-                                <span class="help-block error-block basic-block" style="display: none"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <b>Start Date</b><span class="note-text">*</span>
-                            <div ng-class="{'has-error': newCompetition.form.startDate.$invalid && (newCompetition.form.startDate.$dirty || newCompetition.form.$submitted)}">
-                                <p class="input-group date-margin">
-                                    <input type="text" class="form-control create-question-inputs"
-                                           uib-datepicker-popup="{{format}}"
-                                           ng-model="newCompetition.info.startDate" is-open="popup2.opened"
-                                           placeholder="Start Date"
-                                           datepicker-options="dateOptions" ng-required="true" close-text="Close"
-                                           alt-input-formats="altInputFormats" name="startDate"/>
-                                    <span class="input-group-btn ">
-                                            <button type="button" class="btn btn-default create-question-inputs"
-                                                    ng-click="open2()">
-                                                <i class="glyphicon glyphicon-calendar"></i></button>
-                                        </span></p>
-                                <span class="help-block error-block basic-block" style="display: none"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <b>End Date</b><span class="note-text">*</span>
-                            <div ng-class="{'has-error': newCompetition.form.endDate.$invalid && (newCompetition.form.endDate.$dirty || newCompetition.form.$submitted)}">
-                                <p class="input-group date-margin">
-                                    <input type="text" class="form-control create-question-inputs"
-                                           uib-datepicker-popup="{{format}}"
-                                           ng-model="newCompetition.info.endDate" is-open="popup1.opened"
-                                           placeholder="End Date"
-                                           datepicker-options="dateOptions" ng-required="true" close-text="Close"
-                                           alt-input-formats="altInputFormats" name="endDate"/>
-                                    <span class="input-group-btn ">
-                                            <button type="button" class="btn btn-default create-question-inputs"
-                                                    ng-click="open1()">
-                                                <i class="glyphicon glyphicon-calendar"></i></button>
-                                        </span></p>
-                                <span class="help-block error-block basic-block" style="display: none"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <b>Select Corporate</b><span class="note-text">*</span>
-                            <div ng-class="{'has-error': newCompetition.form.corporateId.$invalid && (newCompetition.form.corporateId.$dirty || newCompetition.form.$submitted)}">
-                                <ui-select id="corporateIds" name="corporateIds" theme="bootstrap"  multiple required
-                                           close-on-select="false" ng-model="selected.corporate" class="create-question-inputs" >
-                                    <ui-select-match placeholder="Select Corporate">
-                                        <span ng-bind="$item.name"></span>
-                                    </ui-select-match>
-                                    <ui-select-choices
-                                            repeat="item in (eventSubTypes | filter: $select.search) track by item.id">
-                                        <span ng-bind="item.name"></span>
-                                    </ui-select-choices>
-                                </ui-select>
-                                <span class="help-block error-block basic-block" style="display: none"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <b>Time Limit</b><span class="note-text">*</span>
-                            <div ng-class="{'has-error': newCompetition.form.timeLimit.$invalid && (newCompetition.form.timeLimit.$dirty || newCompetition.form.$submitted)}">
-                                <input class="form-control create-question-inputs" name="timeLimit"
-                                       placeholder="Time Limit"
-                                       ng-model="newCompetition.info.timeLimit" required>
-                                <span class="help-block error-block basic-block" style="display: none"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <button type="submit" class="btn btn-primary col-sm-12" ng-hide="newCompetition.form.$invalid">Create Competition
-
-                                <i class="fa fa-plus"></i>
+            <div class="table-responsive">
+                <table class="table" st-table="competitionData" st-safe-src="competitionMasterData">
+                    <thead>
+                    <tr class="sortable">
+                        <th class="table-id" st-sort="id"><b>SL.NO</b></th>
+                        <th st-sort="name"><b>COMPETITION NAME</b></th>
+                        <th st-sort="name"><b>COMPANY NAME</b></th>
+                        <th st-sort="name"><b>START DATE</b></th>
+                        <th st-sort="name"><b>END DATE</b></th>
+                        <th st-sort="name"><b>TIME LIMIT</b></th>
+                        <th st-sort="name"><b>TOKEN</b></th>
+                        <th><b>ACTION</b></th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th><input st-search="name" placeholder="Search Competition"
+                                   class="input-sm form-control search-input"
+                                   type="search"/></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in competitionData">
+                        <td>{{$index + 1}}</td>
+                        <td>{{item.competitionName}}</td>
+                        <td>{{item.companyName}}</td>
+                        <td>{{item.startDate}}</td>
+                        <td>{{item.endDate}}</td>
+                        <td>{{item.timeLimit}}</td>
+                        <td>{{item.token}}</td>
+                        <td>
+                            <button class="btn btn-primary btn-xs" data-toggle="modal"
+                                    ng-click="editCompetitionData(item)" data-toggle="tooltip" title="Edit Competition"><i
+                                    class="fa fa-pencil fa-lg"></i>
                             </button>
-                        </div>
-                    </div>
-                </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="8" class="text-center">
+                            <div st-pagination="" st-items-by-page="competitionPageSize" st-displayed-pages="5"></div>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
             </div>
         </div>
-    </div>
-    <div class="col-sm-8">
-        <table class="table" st-table="competitionData" st-safe-src="competitionMasterData">
-            <thead>
-            <tr class="sortable corporate-table">
-                <th class="table-id" st-sort="id"><b>SL.NO</b></th>
-                <th st-sort="name"><b>COMPETITION NAME</b></th>
-                <th st-sort="name"><b>START DATE</b></th>
-                <th st-sort="name"><b>END DATE</b></th>
-                <th st-sort="name"><b>TIME LIMIT</b></th>
-                <th><b>ACTION</b></th>
-            </tr>
-            <tr>
-                <th></th>
-                <th><input st-search="name" placeholder="Search Competition"
-                           class="input-sm form-control search-input"
-                           type="search"/></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="item in competitionData">
-                <td>{{$index + 1}}</td>
-                <td>{{item.name}}</td>
-                <td>{{item.name}}</td>
-                <td>{{item.name}}</td>
-                <td>{{item.name}}</td>
-                <td>
-                    <button class="btn btn-primary btn-xs" data-toggle="modal"
-                            ng-click="editCompetitionData(item)" data-toggle="tooltip" title="Edit Competition"><i
-                            class="fa fa-pencil fa-lg"></i>
-                    </button>
-                    <button class="btn btn-primary btn-xs" data-toggle="modal"
-                            ng-click="gotoManageCorporates(item.id)"><i class="fa fa-users fa-lg" data-toggle="tooltip"
-                                                                     title="Assign Batch"></i>
-                    </button>
-                    <button class="btn btn-primary btn-xs" data-toggle="modal"
-                            confirm="Warning! This will also delete everything related to this competition. Are you sure, you want to delete?"
-                            ng-click="deleteCompetition(item.id)" data-toggle="tooltip" title="Delete Competition"><i
-                            class="fa fa-trash-o fa-lg"></i>
-                    </button>
-                </td>
-            </tr>
-            </tbody>
-            <tfoot>
-            <tr>
-                <td colspan="6" class="text-center">
-                    <div st-pagination="" st-items-by-page="" st-displayed-pages="5"></div>
-                </td>
-            </tr>
-            </tfoot>
-        </table>
     </div>
 </div>
 
