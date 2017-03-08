@@ -84,37 +84,6 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-12">
-                        <div ng-class="{'has-error': editCompetion.form.domain.$invalid && (editCompetion.form.domain.$dirty || editCompetion.form.$submitted)}">
-                            <table class="">
-                                <tr>
-                                    <td>
-                                        <b>Enter Domain</b><span class="note-text">*</span>
-                                    </td>
-                                </tr>
-                                <tr ng-repeat="name in editCompetion.info.domain track by $index">
-                                    <td>
-                                        <input type="text"
-                                               class="form-control option-input "
-                                               ng-model="editCompetion.info.domain[$index].domainName"
-                                               placeholder="Enter Option">
-                                    </td>
-                                    <td>
-                                        <input type="button" class="form-control add-option"
-                                               ng-click="addRow($index)" value="Add Domain"
-                                               ng-show="$last">
-                                    </td>
-                                    <td>
-                                        <input type="button" class="form-control delete-option"
-                                               ng-click="deleteRow($event,$index)" value="Delete"
-                                               ng-show="$index != 0">
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-12">
                         <b>Time Limit</b><span class="note-text">*</span>
                         <div ng-class="{'has-error': editCompetion.form.timeLimit.$invalid && (editCompetion.form.timeLimit.$dirty || editCompetion.form.$submitted)}">
                             <input class="form-control create-question-inputs" name="timeLimit"

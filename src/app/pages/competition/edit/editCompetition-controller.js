@@ -11,10 +11,6 @@
     function editCompetionCtrl($location,$stateParams, Question, $filter, QuestionsData, toastr, $scope, symbolTypes, questionAnswerTypes) {
 
 
-
-
-
-
         $scope.editCompetion = {
             form: {},
             info: {
@@ -22,26 +18,9 @@
                 startDate:"",
                 endDate:"",
                 commonDetailsVOList:[],
-                timeLimit:"",
-                domain:[{
-                    domainName:""
-                }]
+                timeLimit:""
             }
         };
-
-        $scope.addRow = function (index) {
-            var option = {options: ""};
-            if ($scope.editCompetion.info.domain.length <= index + 1) {
-                $scope.editCompetion.info.domain.splice(index + 1, 0, option);
-            }
-        };
-
-        $scope.deleteRow = function ($event, index) {
-            if ($event.which == 1)
-                $scope.editCompetion.info.domain.splice(index, 1);
-        };
-
-
     }
 
 
