@@ -21,12 +21,7 @@
             $location.path("editCompetition/" + item.token);
         };
 
-        $scope.addRow = function (index) {
-            var domain = {domainName: ""};
-            if ($scope.newCompetition.info.domain.length <= index + 1) {
-                $scope.newCompetition.info.domain.splice(index + 1, 0, domain);
-            }
-        };
+
 
         $scope.newCompetition={
             form:{},
@@ -35,18 +30,12 @@
                 startDate:"",
                 endDate:"",
                 commonDetailsVOList:[],
-                timeLimit:"",
-                domain:[{
-                    domainName:""
-                }]
+                timeLimit:""
             }
         };
 
 
-        $scope.deleteRow = function ($event, index) {
-            if ($event.which == 1)
-                $scope.newCompetition.info.domain.splice(index, 1);
-        };
+
         $scope.open1 = function () {
             $scope.popup1.opened = true;
         };

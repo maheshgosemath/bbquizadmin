@@ -42,13 +42,39 @@
         }*/
         $scope.newCorporate = {
             form: {},
-            info: {}
+            info: {
+                corporateName:"",
+                spocName:"",
+                spocEmail:"",
+                domain:[{
+                    domainName:""
+                }]
+            }
         };
+        $scope.deleteRow = function ($event, index) {
+            if ($event.which == 1)
+                $scope.newCorporate.info.domain.splice(index, 1);
+        };
+        $scope.addRow = function (index) {
+            var domain = {domainName: ""};
+            if ($scope.newCorporate.info.domain.length <= index + 1) {
+                $scope.newCorporate.info.domain.splice(index + 1, 0, domain);
+            }
+        };
+
 
         $scope.editCorporate = {
             form: {},
-            info: {}
+            info: {
+                corporateName:"",
+                spocName:"",
+                spocEmail:"",
+                domain:[{
+                    domainName:""
+                }]
+            }
         };
+
         var editCorporateModalBox;
         $scope.editCorporateData = function (item) {
             $scope.editCorporate.info = item;
@@ -61,6 +87,19 @@
                 scope: $scope
             });
         };
+        $scope.deleteEditRow = function ($event, index) {
+            if ($event.which == 1)
+                $scope.editCorporate.info.domain.splice(index, 1);
+        };
+        $scope.addEditRow = function (index) {
+            var domain = {domainName: ""};
+            if ($scope.editCorporate.info.domain.length <= index + 1) {
+                $scope.editCorporate.info.domain.splice(index + 1, 0, domain);
+            }
+        };
+
+
+
     }
 
 

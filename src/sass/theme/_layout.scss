@@ -229,17 +229,26 @@ a {
 
 .option-input {
   margin-top: 5px;
-  width: 353px;
 }
 
 .add-option {
   margin-top: 5px;
-  margin-left: 5px;
+  margin-left: 3px;
+  border-color: #39a0d9;
+  &:hover{
+    background-color: #39a0d9;
+    color: white;
+  }
 }
 
 .delete-option {
   margin-top: 5px;
-  margin-left: 10px;
+  margin-left: 6px;
+  border-color: red;
+  &:hover{
+    color: black;
+    background-color: red;
+  }
 }
 
 .create-question-inputs {

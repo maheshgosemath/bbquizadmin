@@ -26,7 +26,8 @@
                                 <span class="help-block error-block basic-block" style="display: none"></span>
                             </div>
                         </div>
-                    </div>    <div class="form-group">
+                    </div>
+                    <div class="form-group">
                         <div class="col-sm-12">
                             <b>POC Email</b><span class="note-text">*</span>
                             <div ng-class="{'has-error': newCorporate.form.spocEmail.$invalid && (newCorporate.form.spocEmail.$dirty || newCorporate.form.$submitted)}">
@@ -38,8 +39,43 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-12">
-                            <button type="submit" class="btn btn-primary col-sm-12" >Add Corporate
-                            <i class="fa fa-plus" ></i>
+                            <div ng-class="{'has-error': newCorporate.form.domain.$invalid && (newCorporate.form.domain.$dirty || newCorporate.form.$submitted)}">
+                                <table class="col-sm-12">
+                                    <tr>
+                                        <td>
+                                            <b>Enter Domain</b><span class="note-text">*</span>
+                                        </td>
+                                    </tr>
+                                    <tr ng-repeat="name in newCorporate.info.domain track by $index">
+                                        <td>
+                                            <input type="text"
+                                                   class="form-control option-input "
+                                                   ng-model="newCorporate.info.domain[$index].domainName"
+                                                   placeholder="Enter Domain" required>
+                                            <span class="help-block error-block basic-block" style="display: none"></span>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="form-control add-option"
+                                                   ng-click="addRow($index)"
+                                                   ng-show="$last">
+                                                <i class="fa fa-plus" aria-hidden="true"></i></button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="form-control delete-option"
+                                                   ng-click="deleteRow($event,$index)"
+                                                   ng-show="$index != 0">
+                                                <i class="fa fa-times" aria-hidden="true"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <button type="submit" class="btn btn-primary col-sm-12" ng-disabled="newCorporate.form.$invalid">Add Corporate
                             </button>
                         </div>
                     </div>
