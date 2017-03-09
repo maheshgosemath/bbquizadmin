@@ -1,0 +1,54 @@
+<div class="modal-content">
+    <div class="modal-header panel-background">
+        <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
+            <em class="fa fa-close"></em>
+        </button>
+        <h4 class="modal-title ">Edit Corporate</h4>
+    </div>
+    <div class="modal-body">
+        <form name="editCorporate.form" class="form-horizontal" ng-submit="editCorporate(editCorporate.form.$valid)"
+              novalidate>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <b>Corporate Name</b><span class="note-text">*</span>
+                    <div ng-class="{'has-error': editCorporate.form.corporateName.$invalid && (editCorporate.form.corporateName.$dirty || editCorporate.form.$submitted)}">
+                        <input class="form-control create-question-inputs" name="corporateName"
+                               ng-model="editCorporate.info.corporateName" ui-validate="'isValidName($value)'" required>
+                        <span class="help-block error-block basic-block" style="display: none"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <b>POC Name</b><span class="note-text">*</span>
+                    <div ng-class="{'has-error': editCorporate.form.spocName.$invalid && (editCorporate.form.spocName.$dirty || editCorporate.form.$submitted)}">
+                        <input class="form-control create-question-inputs" name="spocName"
+                               ng-model="editCorporate.info.spocName" required>
+                        <span class="help-block error-block basic-block" style="display: none"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <b>POC Email</b><span class="note-text">*</span>
+                    <div ng-class="{'has-error': editCorporate.form.spocEmail.$invalid && (editCorporate.form.spocEmail.$dirty || editCorporate.form.$submitted)}">
+                        <input class="form-control create-question-inputs" name="spocEmail"
+                               ng-model="editCorporate.info.spocEmail" required>
+                        <span class="help-block error-block basic-block" style="display: none"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <button type="submit" class="btn btn-primary col-sm-12">Update</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer modal-footer-margin">
+        &nbsp;
+    </div>
+</div>
+
+  
+          

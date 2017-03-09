@@ -1,21 +1,22 @@
 <div class="horizontal-scroll">
-    <div class="row">
-        <label class="col-sm-2 pull-right">Rows on page
-            <select class="form-control selectpicker show-tick" title="Rows on page" selectpicker
-                    ng-model="questionPageSize" ng-options="i for i in [5,10,15,20,25]">
-            </select>
-        </label>
-    </div>
     <div class="panel profile-panel ">
         <div class="panel-heading panel-background">
             <h3 class="panel-title">Question List</h3>
         </div>
         <div class="panel-body">
-            <div class="table-responsive">
-                <div class="col-sm-12">
-                    <button class="btn btn-primary btn-raised pull-right" ng-click="gotoCreateQuestion()">Create Question
+            <div class="row">
+                <div class="col-sm-10 margin-top-btn col-xs-10 ">
+                    <button class="btn pull-right btn-primary btn-raised" ng-click="gotoCreateQuestion()">Create
+                        Question
                     </button>
                 </div>
+                <label class="col-sm-2 col-xs-2">Rows on page
+                    <select class="form-control selectpicker show-tick" title="Rows on page" selectpicker
+                            ng-model="questionPageSize" ng-options="i for i in [5,10,15,20,25]">
+                    </select>
+                </label>
+            </div>
+            <div class="table-responsive">
                 <table class="table table-responsive table-striped" st-table="questionListsData"
                        st-safe-src="questionListsMasterData">
                     <thead>
@@ -23,8 +24,8 @@
                         <th class="table-id" st-sort="id"><b>ID</b></th>
                         <th st-sort="questionDesc"><b>QUESTION</b></th>
                         <th st-sort="genre"><b>GENRE</b></th>
-                        <th ><b>IMAGE</b></th>
-                        <th ><b>ACTION</b></th>
+                        <th><b>IMAGE</b></th>
+                        <th><b>ACTION</b></th>
                     </tr>
 
                     <tr>
@@ -33,7 +34,7 @@
                                    class="input-sm form-control search-input"
                                    type="search"/></th>
                         <th><select st-search="genre" st-input-event="change"
-                                    data-ng-options="item.id as item.text for item in genreList track by item.id"
+                                    data-ng-options="item.seq as item.name for item in genreList track by item.seq"
                                     st-delay="0" ng-model="dummy" class="input-sm form-control">
                             <option value="">
                                 All

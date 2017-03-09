@@ -23,7 +23,7 @@
             }, delete: function (id) {
                 return httpService.delete("delete/" + id);
             }, getList: function () {
-                return httpService.get("list");
+                return httpService.get("questionlist");
             }, questionInfo: function (questionId) {
                 return httpService.get("questionInfo/" + questionId);
             }, getGenreList: function () {

@@ -8,7 +8,7 @@
     angular.module('UApps.pages.question', [])
         .config(routeConfig).controller('questionCtrl', questionCtrl);
 
-    function questionCtrl($scope, Upload,$uibModal, toastr, $location,QuestionsData, Question) {
+    function questionCtrl($scope, QuestionServices,Upload,$uibModal, toastr, $location,QuestionsData, Question) {
 
         $scope.questionPageSize = 10;
         getGenreList();
@@ -90,6 +90,15 @@
                 $scope.genreList = response.genredetails;
             });
         }
+
+        getQuestionsList();
+        function getQuestionsList() {
+            QuestionServices.getList().then(function (response) {
+                $scope.questionListsMasterData = response.questionList;
+                $scope.questionListsData = [].concat($scope.questionListsMasterData);
+            });
+        }
+
         $scope.selected={
             genre:""
         };
@@ -133,7 +142,7 @@
             }
         };
 
-       /* $scope.createQuestion = function (isValid) {
+     /*   $scope.createQuestion = function (isValid) {
             if (isValid) {
                 QuestionsData.create(Question.createFromObject($scope.newQuestion.info)).then(function (newdata) {
                     toastr.success("Question created successfully!", "Success");
@@ -146,11 +155,11 @@
                     toastr.error(errorMsg, "Failed");
                 });
             }
-        };
-        $scope.editQuestionData = function (item) {
-            $location.path("editQuestion/" + 2);
         };*/
 
+        $scope.editQuestionData = function (item) {
+            $location.path("editQuestion/" + item.id);
+        };
 
     }
 

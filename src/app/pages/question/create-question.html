@@ -56,7 +56,7 @@
                             <table class="option-table">
                                 <tr>
                                     <td>
-                                        Enter Option<span class="note-text">*</span>
+                                        Enter Option<span class="note-text ">*</span>
                                     </td>
                                 </tr>
                                 <tr ng-repeat="name in newQuestion.info.answerOption track by $index">
@@ -82,7 +82,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-2">
+                    <div class="col-sm-6">
                         <span>Correct answer</span><span class="note-text">*</span>
                         <div ng-class="{'has-error': newQuestion.form.correctAnswer.$invalid && (newQuestion.form.correctAnswer.$dirty || newQuestion.form.$submitted)}">
                             <input class="form-control create-question-inputs" name="correctAnswer"
