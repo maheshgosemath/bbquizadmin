@@ -19,13 +19,17 @@
                 }
                 return httpService.post("createquestion", obj, config);
             }, update: function (obj) {
-                return httpService.post("update", obj);
+                var config = {
+                    transformRequest: angular.identity,
+                    headers: {'Content-Type': undefined}
+                }
+                return httpService.post("updatequestion", obj, config);
             }, delete: function (id) {
                 return httpService.delete("delete/" + id);
             }, getList: function () {
                 return httpService.get("questionlist");
-            }, questionInfo: function (questionId) {
-                return httpService.get("questionInfo/" + questionId);
+            }, questionInfo: function (obj) {
+                return httpService.get("questioninfo", obj);
             }, getGenreList: function () {
                 return httpService.get("genredetails" );
             }
@@ -62,8 +66,8 @@
         QuestionsData.update = function (obj) {
             var self = this;
             return QuestionServices.update(obj).then(function (data) {
-                var index = self.getRowIndexById(obj.id)
-                self.rows[index] = obj;
+                /*var index = self.getRowIndexById(obj.id)
+                self.rows[index] = obj;*/
                 return data;
             });
         };
@@ -73,9 +77,9 @@
                 return data.answerResponseList;
             });
         };
-        QuestionsData.questionInfo = function (questionId) {
+        QuestionsData.questionInfo = function (obj) {
             var self = this;
-            return QuestionServices.questionInfo(questionId).then(function (data) {
+            return QuestionServices.questionInfo(obj).then(function (data) {
                 return data;
             });
         };

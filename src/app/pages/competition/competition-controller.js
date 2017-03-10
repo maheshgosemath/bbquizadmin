@@ -21,8 +21,6 @@
             $location.path("editCompetition/" + item.token);
         };
 
-
-
         $scope.newCompetition={
             form:{},
             info:{
@@ -78,6 +76,24 @@
                 })
             }
         }
+
+        /*CompetitionServices.getcompanydetails().then(function(response) {
+            $scope.eventSubTypes=response.companydetails
+        });
+
+        CompetitionServices.getList().then(function(response) {
+            $scope.competitionData = response.competitionList;
+        });*/
+
+        /*$scope.addCompetition= function(isValid) {
+            if(isValid) {
+                var data = $scope.newCompetition.info;
+                CompetitionServices.create(data).then(function(response) {
+                    angular.copy({}, $scope.newCompetition.info);
+                    toastr.success("Competition created successfully");
+                })
+            }
+        }*/
 
     }
 

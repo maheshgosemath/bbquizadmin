@@ -35,15 +35,15 @@ function browserSyncInit(baseDir, browser) {
    */
   // server.middleware = proxyMiddleware('/rest', {target: 'http://mpal-uniquemedia.rhcloud.com', changeOrigin: true});
 
-  var apiserver = proxyMiddleware('/rest', {
+  var apiserver = proxyMiddleware('/brainbout', {
     //target: 'http://edufiler-uniquemedia.rhcloud.com/',
-      target: 'http://192.168.1.229:8080/educational/',
+      target: 'http://brainbout.theuniquemedia.in/',
     changeOrigin: true,             // for vhosted sites, changes host header to match to target's host
     logLevel: 'debug'
   });
 
   browserSync.instance = browserSync.init({
-    startPath: '/app',
+    startPath: '/admin',
     server: server,
     browser: browser,
     ghostMode: false,

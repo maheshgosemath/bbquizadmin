@@ -18,13 +18,20 @@
             });
         }
 
-
         $scope.addCorporate = function (isValid) {
             if (isValid) {
+
+                var domainList = $scope.newCorporate.info.domain;
+                var domains = new Array();
+                for(var i=0;i<domainList.length; i++) {
+                    domains.push(domainList[i].domainName);
+                }
+
                 var data = {
                     corporateName: $scope.newCorporate.info.corporateName,
                     spocName: $scope.newCorporate.info.spocName,
-                    spocEmail: $scope.newCorporate.info.spocEmail
+                    spocEmail: $scope.newCorporate.info.spocEmail,
+                    domainList: domains
                 };
                 var responseData = CompanyServices.create(data).then(function (response) {
                     $scope.newCorporate.form.$setPristine();
@@ -35,11 +42,7 @@
                 });
             }
         };
-      /*  function resetForm() {
-            $scope.newCorporate.corporateName = '';
-            $scope.newCorporate.spocName = '';
-            $scope.newCorporate.spocEmail = '';
-        }*/
+
         $scope.newCorporate = {
             form: {},
             info: {
@@ -75,9 +78,43 @@
             }
         };
 
+        $scope.editCorporateDetails = function(isValid) {
+            if(isValid) {
+                var domainList = $scope.editCorporate.info.domain;
+                var domains = new Array();
+                for(var i=0;i<domainList.length; i++) {
+                    domains.push(domainList[i].domainName);
+                }
+
+                var data = {
+                    corporateSeq: $scope.editCorporate.info.corporateSeq,
+                    corporateName: $scope.editCorporate.info.corporateName,
+                    spocName: $scope.editCorporate.info.spocName,
+                    spocEmail: $scope.editCorporate.info.spocEmail,
+                    domainList: domains
+                };
+                var responseData = CompanyServices.update(data).then(function (response) {
+                    $scope.editCorporate.form.$setPristine();
+                    editCorporateModalBox.close();
+                    getCorporateList();
+                    toastr.success('Company updated successfully.');
+
+                });
+            }
+        };
+
         var editCorporateModalBox;
         $scope.editCorporateData = function (item) {
             $scope.editCorporate.info = item;
+            var domainList = item.domainList;
+            var domains = new Array();
+
+            for(var i=0;i<domainList.length;i++) {
+                var obj = {domainName: domainList[i]};
+                domains.push(obj);
+            }
+            $scope.editCorporate.info.corporateSeq=item.corporateSeq;
+            $scope.editCorporate.info.domain = domains;
             editCorporateModalBox = $uibModal.open({
                 animation: true,
                 templateUrl: 'app/pages/corporate/edit-corporate.html',

@@ -48,10 +48,10 @@
                     </thead>
                     <tbody>
                     <tr ng-repeat="item in questionListsData">
-                        <td>{{item.id}}</td>
-                        <td>{{item.questionDesc}}</td>
+                        <td>{{item.questionSeq}}</td>
+                        <td>{{item.questionTitle}}</td>
                         <td>{{item.genre}}</td>
-                        <td ng-bind-html="item.attachment | linkFromUpload"></td>
+                        <td>{{item.imgUrl}}</td>
                         <td>
                             <button class="btn btn-primary btn-xs btn-raised" data-toggle="modal"
                                     ng-click="editQuestionData(item)" data-toggle="tooltip"

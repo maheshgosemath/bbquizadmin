@@ -137,6 +137,7 @@
                 formData.append('addQuestionVO', JSON.stringify(data));
 
                 QuestionsData.create(formData).then(function(data) {
+                    $location.path("/question");
                     toastr.success("Question created successfully");
                 });
             }
@@ -158,7 +159,7 @@
         };*/
 
         $scope.editQuestionData = function (item) {
-            $location.path("editQuestion/" + item.id);
+            $location.path("editQuestion/" + item.questionSeq);
         };
 
     }

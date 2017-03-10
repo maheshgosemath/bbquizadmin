@@ -13,7 +13,7 @@
             create: function (obj) {
                 return httpService.post("createcompany", obj);
             }, update: function (obj) {
-                return httpService.post("update", obj);
+                return httpService.post("updatecompany", obj);
             }, delete: function (id) {
                 return httpService.delete("delete/" + id);
             }, getList: function () {
