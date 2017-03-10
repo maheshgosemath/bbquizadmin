@@ -45,15 +45,44 @@
 
         getQuestionInfo();
         function getQuestionInfo() {
-            QuestionsData.questionInfo($stateParams.questionId).then(function (response) {
+            getGenreList();
+            $scope.quizSeq = $stateParams.questionId;
+            var data = {
+                quizSeq: $scope.quizSeq
+            };
+            QuestionsData.questionInfo(data).then(function (response) {
                 $scope.questionInfo = response;
                 $scope.editQuestion.info = $scope.questionInfo;
+                initEdit(response);
             });
         }
 
+        function initEdit(data) {
+            $scope.editQuestion.info.questionDesc = data.quizVO.quizTitle;
+            var options = data.quizVO.optionList;
+            var optionList = new Array();
+            for(var i=0;i<options.length;i++) {
+                var obj = {label: options[i].optionTitle}
+                optionList.push(obj);
+                if(options[i].optionSeq == data.correctAnswer) {
+                    $scope.editQuestion.info.correctAnswer = i + 1;
+                }
+            }
+            $scope.editQuestion.info.answerOption = optionList;
 
+            var genreList = $scope.genreList;
+            for(var i=0;i<genreList.length;i++) {
+                if(genreList[i].seq == data.genreSeq) {
+                    $scope.editQuestion.info.genre = genreList[i];
+                }
+            }
+        }
 
-
+        function getGenreList() {
+            QuestionsData.getGenreList().then(function (response) {
+                $scope.genreList = response.genredetails;
+            });
+        }
 
         $scope.goToQuestionListPage = function () {
             $location.path("/questions");
@@ -64,16 +93,38 @@
         };
 
         $scope.updateQuestion = function (isValid) {
-            $scope.editQuestion.info = $scope.questionInfo;
             if (isValid) {
-                QuestionsData.update(Question.editFromObject($scope.editQuestion.info)).then(function () {
-                    toastr.success("Question updated successfully!", "Success");
-                    $scope.questionListsMasterData = QuestionsData.getList();
-                    $scope.questionListsData = [].concat($scope.questionListsMasterData);
+                var optionsArr = new Array();
+                var options = $scope.editQuestion.info.answerOption;
+                var correctAns = $scope.editQuestion.info.correctAnswer;
 
-                    $location.path("/questions");
-                }, function (errorMsg) {
-                    toastr.error(errorMsg, "Failed");
+                for(var i=0;i<options.length;i++) {
+                    var obj = new Object();
+                    obj.optionTitle = options[i].label;
+                    obj.isCorrect = 'N';
+                    if(correctAns == (i+1)) {
+                        obj.isCorrect = 'Y';
+                    }
+                    optionsArr.push(obj);
+                }
+
+                var questionData = {
+                    quizTitle: $scope.editQuestion.info.questionDesc,
+                    optionList: optionsArr,
+                    quizSeq: $scope.quizSeq
+                };
+                var data = {
+                    quizVO: questionData,
+                    genreSeq: $scope.editQuestion.info.genre.seq
+                };
+
+                var formData = new FormData();
+                formData.append('multipartFile', $scope.imageFile);
+                formData.append('addQuestionVO', JSON.stringify(data));
+
+                QuestionsData.update(formData).then(function(data) {
+                    $location.path("/question");
+                    toastr.success("Question updated successfully");
                 });
             }
         };

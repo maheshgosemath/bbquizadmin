@@ -8,7 +8,7 @@
 <div class="col-sm-12">
     <div class="panel profile-panel">
         <div class="panel-heading panel-background">
-            <h3 class="panel-title">Create Question</h3>
+            <h3 class="panel-title">Update Question</h3>
         </div>
         <div class="panel-body">
             <form name="editQuestion.form" class="form-horizontal" ng-submit="updateQuestion(editQuestion.form.$valid)"
@@ -31,9 +31,9 @@
                                 Select Genre<span class="note-text">*</span>
                                 <div ng-class="{'has-error': editQuestion.form.questionType.$invalid && (editQuestion.form.questionType.$dirty || editQuestion.form.$submitted)}">
                                     <select class="form-control create-question-inputs"
-                                            ng-model="selected.genre"
+                                            ng-model="editQuestion.info.genre"
                                             id="questionType" name="questionType"
-                                            ng-options="item.id as item.genre for g in genreList" required>
+                                            ng-options="item.name for item in genreList track by item.seq" required>
                                         <option value="">Select Genre Type</option>
                                     </select>
                                     <span class="help-block error-block basic-block" style="display: none"></span>
@@ -99,9 +99,20 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <div class="col-sm-6">
+                        <span>Correct answer</span><span class="note-text">*</span>
+                        <div ng-class="{'has-error': newQuestion.form.correctAnswer.$invalid && (newQuestion.form.correctAnswer.$dirty || newQuestion.form.$submitted)}">
+                            <input class="form-control create-question-inputs" name="correctAnswer"
+                                   placeholder="Enter correct answer"
+                                   ng-model="editQuestion.info.correctAnswer" maxlength="1" required>
+                            <span class="help-block error-block basic-block pull-right" style="display: none">Correct answer is required field.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
                     <div class="col-sm-10">
                         <button type="submit" class="btn btn-primary btn-raised"
-                                ng-disabled="editQuestion.form.$invalid">Create Question
+                                ng-disabled="editQuestion.form.$invalid">Update
                         </button>
                     </div>
                 </div>
