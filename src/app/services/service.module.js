@@ -6,7 +6,7 @@
 
     angular.module('UApps.services', [])
         .factory('HttpService', function ($http, $q, $location, toastr) {
-            var apiRoot = "/";
+            var apiRoot = "../";
 
             var HttpService = function (apiModule) {
                 this.apiModule = apiModule;
