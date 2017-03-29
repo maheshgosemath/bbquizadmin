@@ -18,6 +18,8 @@
                 return httpService.delete("delete/" + id);
             }, getList: function () {
                 return httpService.get("companylist");
+            }, getLocationDetails: function() {
+                return httpService.get("locationdetails");
             }
         };
         return CompanyServices;

@@ -32,7 +32,26 @@
                             <b>POC Email</b><span class="note-text">*</span>
                             <div ng-class="{'has-error': newCorporate.form.spocEmail.$invalid && (newCorporate.form.spocEmail.$dirty || newCorporate.form.$submitted)}">
                                 <input class="form-control create-question-inputs" name="spocEmail"
-                                       ng-model="newCorporate.info.spocEmail"  required>
+                                       ng-model="newCorporate.info.spocEmail"  type="email" required>
+                                <span class="help-block error-block basic-block" style="display: none"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <b>Select Location</b><span class="note-text">*</span>
+                            <div ng-class="{'has-error': newCorporate.form.locationId.$invalid && (newCorporate.form.locationId.$dirty || newCorporate.form.$submitted)}">
+                                <ui-select id="locationIds" name="locationIds" theme="bootstrap" multiple required
+                                           close-on-select="false" ng-model="newCorporate.info.locationDetails"
+                                           class="form-control create-question-inputs">
+                                    <ui-select-match placeholder="Select Location">
+                                        <span ng-bind="$item.name"></span>
+                                    </ui-select-match>
+                                    <ui-select-choices
+                                            repeat="item in (locations | filter: $select.search) track by item.seq">
+                                        <span ng-bind="item.name"></span>
+                                    </ui-select-choices>
+                                </ui-select>
                                 <span class="help-block error-block basic-block" style="display: none"></span>
                             </div>
                         </div>
@@ -50,7 +69,7 @@
                                         <td>
                                             <input type="text"
                                                    class="form-control option-input "
-                                                   ng-model="newCorporate.info.domain[$index].domainN"
+                                                   ng-model="newCorporate.info.domain[$index].domainName"
                                                    placeholder="Enter Domain" required>
                                             <span class="help-block error-block basic-block" style="display: none"></span>
                                         </td>

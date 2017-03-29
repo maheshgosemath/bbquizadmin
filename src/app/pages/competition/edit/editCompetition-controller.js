@@ -8,7 +8,7 @@
     angular.module('UApps.pages.question')
         .config(routeConfig).controller('editCompetionCtrl', editCompetionCtrl);
 
-    function editCompetionCtrl($location,$stateParams, Question, $filter, QuestionsData, toastr, $scope, symbolTypes, questionAnswerTypes) {
+    function editCompetionCtrl($location,$stateParams, Question, $filter, CompetitionServices, toastr, $scope, symbolTypes, questionAnswerTypes) {
 
 
         $scope.editCompetion = {
@@ -21,6 +21,19 @@
                 timeLimit:""
             }
         };
+
+        CompetitionServices.getcompanydetails().then(function (response) {
+            $scope.eventSubTypes = response.companydetails
+        });
+
+        var data = {
+            token: $stateParams.token
+        }
+        CompetitionServices.getCompetitionData(data).then(function(response) {
+            $scope.editCompetion.info = response.competitiondetails;
+            var companyInfo = [{seq: response.competitiondetails.companySeq, name: response.competitiondetails.companyName}];
+            $scope.editCompetion.info.commonDetailsVOList = companyInfo;
+        });
     }
 
 

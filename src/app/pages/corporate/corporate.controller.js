@@ -18,7 +18,12 @@
             });
         }
 
+        CompanyServices.getLocationDetails().then(function (response) {
+            $scope.locations = response.locationdetails
+        });
+
         $scope.addCorporate = function (isValid) {
+            console.log($scope.newCorporate.info);
             if (isValid) {
 
                 var domainList = $scope.newCorporate.info.domain;
@@ -91,7 +96,8 @@
                     corporateName: $scope.editCorporate.info.corporateName,
                     spocName: $scope.editCorporate.info.spocName,
                     spocEmail: $scope.editCorporate.info.spocEmail,
-                    domainList: domains
+                    domainList: domains,
+                    locationDetails: $scope.editCorporate.info.locationDetails
                 };
                 var responseData = CompanyServices.update(data).then(function (response) {
                     $scope.editCorporate.form.$setPristine();
@@ -105,7 +111,9 @@
 
         var editCorporateModalBox;
         $scope.editCorporateData = function (item) {
-            $scope.editCorporate.info = item;
+            $scope.editCorporate.info.corporateName = item.corporateName;
+            $scope.editCorporate.info.spocName = item.spocName;
+            $scope.editCorporate.info.spocEmail = item.spocEmail;
             var domainList = item.domainList;
             var domains = new Array();
 
@@ -113,6 +121,13 @@
                 var obj = {domainName: domainList[i]};
                 domains.push(obj);
             }
+            var locations = item.locationDetails;
+            var locationIds = new Array();
+            for(var i=0; i<locations.length;i++) {
+                var locationInfo = {seq: locations[i].seq, name: locations[i].name};
+                locationIds.push(locationInfo);
+            }
+            $scope.editCorporate.info.locationDetails = locationIds;
             $scope.editCorporate.info.corporateSeq=item.corporateSeq;
             $scope.editCorporate.info.domain = domains;
             editCorporateModalBox = $uibModal.open({
