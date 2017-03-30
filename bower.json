@@ -59,6 +59,12 @@
         "fonts/glyphicons-halflings-regular.woff2"
       ]
     },
+    "angularjs-datetime-picker": {
+      "main": [
+        "angularjs-datetime-picker.css",
+        "angularjs-datetime-picker.js"
+      ]
+    },
     "slimScroll": {
       "main": "./jquery.slimscroll.js"
     },
