@@ -40,7 +40,14 @@
                 };
                 var responseData = CompanyServices.create(data).then(function (response) {
                     $scope.newCorporate.form.$setPristine();
-                    $scope.newCorporate.info = "";
+                    $scope.newCorporate.info = {
+                        corporateName:"",
+                        spocName:"",
+                        spocEmail:"",
+                        domain:[{
+                            domainName:""
+                        }]
+                    };
                     getCorporateList();
                     toastr.success('Company added successfully.');
 

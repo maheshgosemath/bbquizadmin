@@ -10,7 +10,7 @@
 
         'UApps.pages.dashboard',
         'UApps.pages.question',
-        'UApps.pages.templates',
+        //'UApps.pages.templates',
         'UApps.pages.corporate',
         'UApps.pages.competition'
 
