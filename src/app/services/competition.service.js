@@ -20,6 +20,8 @@
                 return httpService.get("competitionlist");
             }, getcompanydetails: function() {
                 return httpService.get("companydetails");
+            },getCompetitionData: function(obj) {
+                return httpService.get("competitiondetails", obj);
             }
         };
         return CompetitionServices;

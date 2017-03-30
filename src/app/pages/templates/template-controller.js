@@ -91,10 +91,10 @@
                 templateUrl: 'app/pages/templates/template-list.html',
                 controller: TemplatesCtrl,
                 title: 'Templates',
-                sidebarMeta: {
+               /* sidebarMeta: {
                     icon: 'fa fa-list-alt',
                     order: 2
-                }
+                }*/
             })
     }
 

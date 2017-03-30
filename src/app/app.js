@@ -16,6 +16,7 @@ angular.module('UApps', [
     'ngSanitize',
     'chart.js',
     'ngFileUpload',
+    'angularjs-datetime-picker',
 
     'UApps.services',
     'UApps.theme',
