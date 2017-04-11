@@ -51,33 +51,33 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 col-md-12 col-lg-6 col-xs-12">
                         <div ng-class="{'has-error': newQuestion.form.answerOption.$invalid && (newQuestion.form.answerOption.$dirty || newQuestion.form.$submitted)}">
-                            <table class="option-table">
-                                <tr>
-                                    <td>
-                                        Enter Option<span class="note-text ">*</span>
-                                    </td>
-                                </tr>
-                                <tr ng-repeat="name in newQuestion.info.answerOption track by $index">
-                                    <td>
+                            <div class="option-table">
+                                Enter Option<span class="note-text">*</span>
+                                <div class="row" ng-repeat="name in newQuestion.info.answerOption track by $index">
+                                    <div class="col-sm-6 col-md-8 col-lg-8 col-xs-6">
                                         <input type="text"
                                                class="form-control option-input "
                                                ng-model="newQuestion.info.answerOption[$index].label"
-                                               placeholder="Enter Option" required>
-                                    </td>
-                                    <td>
-                                        <input type="button" class="form-control add-option"
-                                               ng-click="addRow($index)" value="Add Option"
-                                               ng-show="$last">
-                                    </td>
-                                    <td>
-                                        <input type="button" class="form-control delete-option"
-                                               ng-click="deleteRow($event,$index)" value="Delete"
-                                               ng-show="$index != 0">
-                                    </td>
-                                </tr>
-                            </table>
+                                               placeholder="Enter Option">
+                                    </div>
+                                    <div class="col-sm-3 col-md-2 col-lg-2 col-xs-3">
+                                        <button type="button" class="form-control add-option"
+                                                ng-click="addRow($index)"
+                                                ng-show="$last">
+                                            <i class="fa fa-plus" aria-hidden="true"></i></button>
+                                        </button>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2 col-lg-2 col-xs-3">
+                                        <button type="button" class="form-control delete-option"
+                                                ng-click="deleteRow($event,$index)"
+                                                ng-show="$index != 0">
+                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -37,7 +37,8 @@ function browserSyncInit(baseDir, browser) {
 
   var apiserver = proxyMiddleware('/brainbout', {
     //target: 'http://edufiler-uniquemedia.rhcloud.com/',
-      target: 'http://192.168.0.104:8080',
+      //target: 'http://192.168.0.104:8080',
+      target: 'http://brainbout.theuniquemedia.in/',
       changeOrigin: true,             // for vhosted sites, changes host header to match to target's host
       logLevel: 'debug'
   });

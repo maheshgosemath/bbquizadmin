@@ -45,7 +45,8 @@
                                        ngf-select="uploadImage($file)"
                                        ng-model="imageFile"
                                        name="file"
-                                       accept="image/*" ngf-max-size="2MB"><br>
+                                       accept="file_extension|audio/*|video/*|image/*|media_type"
+                                       ngf-max-size="10MB"><br>
                             </div>
                         </div>
                     </div>
@@ -68,33 +69,33 @@
                      </div>
                  </div>-->
                 <div class="form-group">
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 col-md-12 col-lg-6 col-xs-12">
                         <div ng-class="{'has-error': editQuestion.form.answerOption.$invalid && (editQuestion.form.answerOption.$dirty || editQuestion.form.$submitted)}">
-                            <table class="option-table">
-                                <tr>
-                                    <td>
-                                        Enter Option<span class="note-text">*</span>
-                                    </td>
-                                </tr>
-                                <tr ng-repeat="name in editQuestion.info.answerOption track by $index">
-                                    <td>
+                            <div class="option-table">
+                                Enter Option<span class="note-text">*</span>
+                                <div class="row" ng-repeat="name in editQuestion.info.answerOption track by $index">
+                                    <div class="col-sm-6 col-md-8 col-lg-8 col-xs-6">
                                         <input type="text"
                                                class="form-control option-input "
                                                ng-model="editQuestion.info.answerOption[$index].label"
                                                placeholder="Enter Option">
-                                    </td>
-                                    <td>
-                                        <input type="button" class="form-control add-option"
-                                               ng-click="addRow($index)" value="Add Option"
+                                    </div>
+                                    <div class="col-sm-3 col-md-2 col-lg-2 col-xs-3">
+                                        <button type="button" class="form-control add-option"
+                                               ng-click="addRow($index)"
                                                ng-show="$last">
-                                    </td>
-                                    <td>
-                                        <input type="button" class="form-control delete-option"
-                                               ng-click="deleteRow($event,$index)" value="Delete"
+                                            <i class="fa fa-plus" aria-hidden="true"></i></button>
+                                        </button>
+                                    </div>
+                                    <div class="col-sm-3 col-md-2 col-lg-2 col-xs-3">
+                                        <button type="button" class="form-control delete-option"
+                                               ng-click="deleteRow($event,$index)"
                                                ng-show="$index != 0">
-                                    </td>
-                                </tr>
-                            </table>
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
