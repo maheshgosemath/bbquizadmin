@@ -22,6 +22,8 @@
                 return httpService.get("companydetails");
             },getCompetitionData: function(obj) {
                 return httpService.get("competitiondetails", obj);
+            }, getCompanyLocations: function(obj) {
+                return httpService.get("companylocations", obj);
             }
         };
         return CompetitionServices;

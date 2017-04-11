@@ -36,7 +36,8 @@
                     corporateName: $scope.newCorporate.info.corporateName,
                     spocName: $scope.newCorporate.info.spocName,
                     spocEmail: $scope.newCorporate.info.spocEmail,
-                    domainList: domains
+                    domainList: domains,
+                    locationDetails: $scope.editCorporate.info.locationDetails
                 };
                 var responseData = CompanyServices.create(data).then(function (response) {
                     $scope.newCorporate.form.$setPristine();

@@ -12,6 +12,12 @@
 
         $scope.format = "yyyy-MM-dd";
         $scope.competitionPageSize = 10;
+        $scope.locations = new Array();
+
+        /*var data = [{
+           seq: 4, name: 'Mumbai'
+        }];
+        $scope.locations.push(data);*/
 
 
         $scope.gotoCreateCompetition = function () {
@@ -52,7 +58,8 @@
         };
 
         CompetitionServices.getcompanydetails().then(function (response) {
-            $scope.eventSubTypes = response.companydetails
+            $scope.companies = response.companydetails
+            $scope.newCompetition.info.companyDetailsVO = new Array();
         });
 
         getCompetitionsList();
@@ -66,6 +73,8 @@
         $scope.addCompetition = function (isValid) {
             if (isValid) {
                 var data = $scope.newCompetition.info;
+                console.log($scope.newCompetition.info.companyDetailsVO[0]);
+                console.log(data);
                 CompetitionServices.create(data).then(function (response) {
                    // angular.copy({}, $scope.newCompetition.info);
                     $scope.newCompetition.form.$setPristine();
@@ -75,6 +84,14 @@
                     toastr.success("Competition created successfully");
                 })
             }
+        }
+
+        $scope.companyChange = function(data, index) {
+            var obj = {companySeq: data.seq};
+            $scope.locations[index] = new Array();
+            CompetitionServices.getCompanyLocations(obj).then(function(response) {
+                $scope.locations[index] = response.companylocations;
+            });
         }
 
         $scope.choices = [{id: 'choice1'}];
@@ -89,7 +106,7 @@
             $scope.choices.splice(lastItem);
         };
         /*CompetitionServices.getcompanydetails().then(function(response) {
-            $scope.eventSubTypes=response.companydetails
+            $scope.companies=response.companydetails
         });
 
         CompetitionServices.getList().then(function(response) {

@@ -94,30 +94,34 @@
                     </div>-->
                 <div class="form-group">
                     <div class="col-sm-12">
-                        <fieldset data-ng-repeat="choice in choices">
+                        <fieldset data-ng-repeat="choice in choices track by $index">
                             <div class="row">
                                 <div class="col-sm-5">
-                                    <select class="form-control create-question-inputs" ng-model="newCompetition.info.commonDetailsVOList" class="form-control"
+                                    <select class="form-control create-question-inputs" ng-model="newCompetition.info.companyDetailsVO[$index]" class="form-control"
                                             name="corporateId"
-                                            ng-options="item as item.name for item in eventSubTypes"
-                                            required>
+                                            ng-options="item as item.name for item in companies track by item.seq"
+                                            required ng-change="companyChange(newCompetition.info.companyDetailsVO[$index], $index)">
                                         <option value="">Select Corporate</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-5">
-                                    <select class="form-control create-question-inputs" ng-model="newCompetition.info.competitionLocation" class="form-control"
-                                            name="locatioId"
-                                            ng-options="item as item.name for item in locationData"
-                                            required>
-                                        <option value="">Select Location</option>
-                                    </select>
+                                    <ui-select id="locationIds" name="locationIds" theme="bootstrap" multiple required
+                                        close-on-select="false" ng-model="newCompetition.info.companyDetailsVO[$index].locationList"
+                                               class="form-control create-question-inputs">
+                                        <ui-select-match placeholder="Select Location">
+                                            <span ng-bind="$item.name"></span>
+                                        </ui-select-match>
+                                        <ui-select-choices repeat="item in locations[$index] track by item.seq">
+                                            <span ng-bind="item.name"></span>
+                                        </ui-select-choices>
+                                    </ui-select>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-5">
                                     <div ng-class="{'has-error': newCompetition.form.startDate.$invalid && (newCompetition.form.startDate.$dirty || newCompetition.form.$submitted)}">
                                         <input class="form-control create-question-inputs" placeholder="Start Date"
-                                               ng-model="newCompetition.info.startDate" datetime-picker
+                                               ng-model="newCompetition.info.companyDetailsVO[$index].startDate" datetime-picker
                                                date-format="yyyy-MM-dd HH:mm:ss"/>
                                         <span class="help-block error-block basic-block" style="display: none"></span>
                                     </div>
@@ -125,7 +129,7 @@
                                 <div class="col-sm-5">
                                     <div ng-class="{'has-error': newCompetition.form.endDate.$invalid && (newCompetition.form.endDate.$dirty || newCompetition.form.$submitted)}">
                                         <input class="form-control create-question-inputs" placeholder="End Date"
-                                               ng-model="newCompetition.info.endDate" datetime-picker
+                                               ng-model="newCompetition.info.companyDetailsVO[$index].endDate" datetime-picker
                                                date-format="yyyy-MM-dd HH:mm:ss"/>
                                         <span class="help-block error-block basic-block" style="display: none"></span>
                                     </div>
@@ -151,6 +155,5 @@
                 </div>
             </form>
         </div>
-
     </div>
 </div>

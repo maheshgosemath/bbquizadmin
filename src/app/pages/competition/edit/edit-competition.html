@@ -30,17 +30,10 @@
                         <b>Start Date</b><span class="note-text">*</span>
                         <div ng-class="{'has-error': editCompetion.form.startDate.$invalid && (editCompetion.form.startDate.$dirty || editCompetion.form.$submitted)}">
                             <p class="input-group date-margin">
-                                <input type="text" class="form-control create-question-inputs"
-                                       uib-datepicker-popup="yyyy-MM-dd"
-                                       ng-model="editCompetion.info.startDate" is-open="popup2.opened"
-                                       placeholder="Start Date"
-                                       datepicker-options="dateOptions" ng-required="true" close-text="Close"
-                                       alt-input-formats="altInputFormats" name="startDate"/>
-                                <span class="input-group-btn ">
-                                            <button type="button" class="btn btn-default create-question-inputs"
-                                                    ng-click="open2()">
-                                                <i class="glyphicon glyphicon-calendar"></i></button>
-                                        </span></p>
+                                <input class="form-control create-question-inputs" placeholder="Start Date"
+                                       ng-model="editCompetition.info.startDate" datetime-picker
+                                       date-format="yyyy-MM-dd HH:mm:ss"/>
+                            </p>
                             <span class="help-block error-block basic-block" style="display: none"></span>
                         </div>
 
@@ -49,17 +42,10 @@
                         <b>End Date</b><span class="note-text">*</span>
                         <div ng-class="{'has-error': editCompetion.form.endDate.$invalid && (editCompetion.form.endDate.$dirty || editCompetion.form.$submitted)}">
                             <p class="input-group date-margin">
-                                <input type="text" class="form-control create-question-inputs"
-                                       uib-datepicker-popup="yyyy-MM-dd"
-                                       ng-model="editCompetion.info.endDate" is-open="popup1.opened"
-                                       placeholder="End Date"
-                                       datepicker-options="dateOptions" ng-required="true" close-text="Close"
-                                       alt-input-formats="altInputFormats" name="endDate"/>
-                                <span class="input-group-btn ">
-                                            <button type="button" class="btn btn-default create-question-inputs"
-                                                    ng-click="open1()">
-                                                <i class="glyphicon glyphicon-calendar"></i></button>
-                                        </span></p>
+                                <input class="form-control create-question-inputs" placeholder="Start Date"
+                                       ng-model="editCompetition.info.endDate" datetime-picker
+                                       date-format="yyyy-MM-dd HH:mm:ss"/>
+                            </p>
                             <span class="help-block error-block basic-block" style="display: none"></span>
                         </div>
                     </div>
